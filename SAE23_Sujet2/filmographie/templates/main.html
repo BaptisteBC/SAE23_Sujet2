@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'filmographie/main.css'%}">
+        <title>{% block title %} Film {% endblock %} </title>
+    </head>
+    <body>
+        <header>
+            <form class="f1">
+                <input type="text" placeholder="Le film que vous voullez">
+                <button type="submit">Rechercher</button>
+            </form>
+            <nav>
+                <a href="/filmographie/index">Home</a>
+                <a href="/filmographie/Commentaire">Commentaire</a>
+            </nav>
+        </header>
+        {% block content %}
+            <H1> Bien venu ce le site </H1>
+        {% endblock %}
+    </body>
