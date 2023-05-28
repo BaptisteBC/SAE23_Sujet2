@@ -18,6 +18,11 @@
             </nav>
         </header>
         {% block content %}
-            <H1> Bien venu ce le site </H1>
+            <H1> Bienvenu sur le site </H1>
         {% endblock %}
+        {% block form %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input classe="send" type="submit" value="terminer"\>
+        {%endblock%}
     </body>

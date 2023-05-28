@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ChoiceField
 from django.utils.translation import gettext_lazy as _
 from . import models
 
@@ -14,11 +14,11 @@ class Categorie_Form(ModelForm):
 class Film_Form(ModelForm):
     class Meta:
         model = models.Film
-        fields = ('titre', 'annee_sortie', 'affiche', 'realisateur', 'categorie',)
+        fields = ('titre', 'annee_sortie',  'realisateur', 'categorie',) # test sans 'affiche',
         labels = {
             'titre': _('Titre'),
             'annee_sortie': _('Année de sortie'),
-            'affiche': _('Affiche'),
+            #'affiche': _('Affiche'),
             'realisateur': _('Réalisateur'),
             'categorie': _('Categorie'),
         }
@@ -26,12 +26,12 @@ class Film_Form(ModelForm):
 class Acteur_Form(ModelForm):
     class Meta:
         model = models.Acteur
-        fields = ('nom', 'prenom', 'age', 'photos',)
+        fields = ('nom', 'prenom', 'age', )# test sans 'photos',
         labels = {
             'nom': _('Nom'),
             'prenom': _('Prénom'),
             'age': _('Âge'),
-            'photos': _('Photos'),
+            #'photos': _('Photos'),
         }
 
 class FilmActeur_Form(ModelForm):
@@ -44,6 +44,13 @@ class FilmActeur_Form(ModelForm):
         }
 
 class Personne_Form(ModelForm):
+    type = ChoiceField(
+        choices=[('', 'Choisir')] + list(models.Personne.TYPE_CHOICES),
+        label=_('Type'),
+        error_messages={
+        'required': _('Vous devez choisir un type'),
+    }
+    )
     class Meta:
         model = models.Personne
         fields = ('pseudo', 'nom', 'prenom', 'mail', 'mot_de_passe', 'type',)

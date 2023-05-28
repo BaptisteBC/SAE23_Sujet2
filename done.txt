@@ -1,0 +1,6 @@
+- création des databases et du support (XAMPP)
+https://codinggear.blog/how-to-connect-mysql-database-with-django/#how-to-setup-django-with-mysql-using-mysql-server
+- créaton des tables
+- création des formulairs 
+- création des create (du CRUD)
+- recherhe sur la barre de recherche (ca a l'air méga chaud donc jsp si on le fait au final)

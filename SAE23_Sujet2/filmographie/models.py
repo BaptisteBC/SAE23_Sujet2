@@ -7,9 +7,9 @@ class Categorie(models.Model):
 class Film(models.Model):
     titre = models.CharField(max_length=255)
     annee_sortie = models.IntegerField()
-    affiche = models.BinaryField(null=True)  # longblob translates to BinaryField in Django
+    affiche = models.BinaryField(null=True)  # longblob = BinaryField pour Django
     realisateur = models.CharField(max_length=255)
-    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)  # foreign key to Categorie
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)  # "foreign key " vers categorie
 
 class Acteur(models.Model):
     nom = models.CharField(max_length=255)
