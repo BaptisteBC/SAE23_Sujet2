@@ -7,5 +7,6 @@ urlpatterns = [
     path('ajout_commentaire', views.add_Commentaire),
     path('ajout_film/', views.add_Film),
     path('inscription/', views.add_Personne),
+    path('ajout_categorie/', views.add_Categorie),
 
 ]

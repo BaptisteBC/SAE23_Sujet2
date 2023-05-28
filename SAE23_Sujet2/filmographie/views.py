@@ -8,7 +8,7 @@ def index(request):
 
 def add_Categorie(request):
     form = forms.Categorie_Form
-    return render(request, 'filmographie/add_Categorie', {"form" : form})
+    return render(request, 'filmographie/add_form.html', {"form" : form})
 
 #def update_Categorie(request):
 
@@ -20,7 +20,7 @@ def add_Categorie(request):
 
 def add_Film(request):
     form = forms.Film_Form
-    return render(request, 'filmographie/add_Film', {'form' : form})
+    return render(request, 'filmographie/add_form.html', {'form' : form})
 
 #def update_Film(request):
 
@@ -32,7 +32,7 @@ def add_Film(request):
 
 def add_Acteur(request):
     form = forms.Acteur_Form
-    return render(request, 'filmographie/add_Acteur', {'form': form})
+    return render(request, 'filmographie/add_form.html', {'form': form})
 
 #def update_Acteur(request):
 
@@ -44,7 +44,7 @@ def add_Acteur(request):
 
 def add_Personne(request):
     form = forms.Personne_Form
-    return render(request, 'filmographie/add_Personne.html', {"form" : form})
+    return render(request, 'filmographie/add_form.html', {"form" : form})
 
 #def update_Personne(request):
 
@@ -56,7 +56,7 @@ def add_Personne(request):
 
 def add_Commentaire(request):
     form = forms.Commentaire_Form
-    return render(request, 'filmographie/post_Commentaire', {'form': form})
+    return render(request, 'filmographie/add_form.html', {'form': form})
 
 #def update_Commentaire(request):
 
