@@ -17,7 +17,7 @@ class Acteur(models.Model):
     age = models.IntegerField()
     photos = models.BinaryField(null=True)
 
-class FilmActeur(models.Model):
+class Film_Acteur(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     acteur = models.ForeignKey(Acteur, on_delete=models.CASCADE)
 
@@ -33,7 +33,7 @@ class Personne(models.Model):
     nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255)
     mail = models.EmailField(max_length=255)
-    mot_de_passe = models.CharField(max_length=255)  # consider using Django's built-in auth system instead
+    mot_de_passe = models.CharField(max_length=255)  
     type = models.CharField(max_length=13, choices=TYPE_CHOICES)
 
 class Commentaire(models.Model):
