@@ -4,3 +4,4 @@ https://codinggear.blog/how-to-connect-mysql-database-with-django/#how-to-setup-
 - création des formulairs 
 - création des create (du CRUD)
 - recherhe sur la barre de recherche (ca a l'air méga chaud donc jsp si on le fait au final)
+- j'ai commencé a bosser le read update delete pour chaque table. (du CRUD)
