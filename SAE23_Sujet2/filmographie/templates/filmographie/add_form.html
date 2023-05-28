@@ -4,17 +4,17 @@
 
 {% block title %}
     {% load test_add_form %}
-    {% if form|class_name == "Categorie_Form" %}
+    {% if form|add_form == "Categorie_Form" %}
         ajouter une catégorie
-    {% elif form|class_name == "Film_Form" %}
+    {% elif form|add_form == "Film_Form" %}
         ajouter un Film
-    {% elif form|class_name == "Acteur_Form" %}
+    {% elif form|add_form == "Acteur_Form" %}
         ajouter un acteur
-    {% elif form|class_name == "FilmActeur_Form" %}
+    {% elif form|add_form == "FilmActeur_Form" %}
         ajouter une relation acteur/film
-    {% elif form|class_name == "Personne_Form" %}
+    {% elif form|add_form == "Personne_Form" %}
         Inscrition
-    {% elif form|class_name == "Commentaire_Form" %}
+    {% elif form|add_form == "Commentaire_Form" %}
         poster un Commentaire
     {%endif%}
 {% endblock %}
