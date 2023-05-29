@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField
+from django.forms import ModelForm, ChoiceField, ValidationError
 from django.utils.translation import gettext_lazy as _
 from . import models
 
@@ -51,6 +51,7 @@ class Personne_Form(ModelForm):
         'required': _('Vous devez choisir un type'),
     }
     )
+    
     class Meta:
         model = models.Personne
         fields = ('pseudo', 'nom', 'prenom', 'mail', 'mot_de_passe', 'type',)
@@ -63,6 +64,11 @@ class Personne_Form(ModelForm):
             'type': _('Type'),
         }
 
+    def check_pseudo(self):
+        pseudo = self.cleaned_data['pseudo']
+        if models.Personne.objects.filter(pseudo=pseudo).exists():
+            raise ValidationError("This pseudo is already in use.")
+        return pseudo
 class Commentaire_Form(ModelForm):
     class Meta:
         model = models.Commentaire

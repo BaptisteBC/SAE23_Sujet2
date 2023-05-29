@@ -13,10 +13,20 @@
             </form>
             <nav>
                 <a href="/filmographie/">Home</a>
-                <a href="/filmographie/Commentaire/">Commentaire</a>
+                <a href="/filmographie/Commentaire">Commentaire</a>
                 <a href="/filmographie/inscription/">Sign In</a>
             </nav>
         </header>
         {% block content %}
-            <H1> Bienvenu sur le site </H1>
+
         {% endblock %}
+        {% block form %}
+            {%block test%}
+            <form method="post" action="/filmographie/traitement/">
+            {%endblock%}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="send" type="submit" value="terminer">
+            </form>
+        {%endblock%}
+    </body>

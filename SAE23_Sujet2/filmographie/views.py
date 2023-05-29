@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from . import forms
 from . import models
 # Create your views here.
@@ -56,7 +56,8 @@ def add_Personne(request):
 
 def add_Commentaire(request):
     form = forms.Commentaire_Form
-    return render(request, 'filmographie/add_form.html', {'form': form})
+    add_form = forms.Commentaire_Form
+    return render(request, 'filmographie/add_form.html', {'form': form, 'test':form})
 
 #def update_Commentaire(request):
 
@@ -66,3 +67,26 @@ def add_Commentaire(request):
     return render(request, 'filmographie/Commentaire.html')
 '''
 #def view_all_Commentaire(request):
+
+
+def traitement(request, id):
+    if id == 1:
+        form = forms.Categorie_Form(request.POST)
+    elif id == 2:
+        form = forms.Film_Form(request.POST)
+    elif id == 3:
+        form = forms.Acteur_Form(request.POST)
+    #elif id == 4:
+        
+    elif id == 5 :
+        form = forms.Personne_Form(request.POST)
+    elif id == 6:
+        form = forms.Commentaire_Form(request.POST)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect( "/filmographie/submitted/")
+    else:
+        return render(request, 'filmographie/add_form.html',{'form':form})
+    
+def submitted(request):
+    return render(request, 'filmographie/submitted.html')

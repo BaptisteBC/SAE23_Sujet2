@@ -1,18 +1,18 @@
 from django.db import models
 
 class Categorie(models.Model):
-    nom = models.CharField(max_length=255)
+    nom = models.CharField(max_length=255, unique=True)
     descriptif = models.TextField()
 
 class Film(models.Model):
-    titre = models.CharField(max_length=255)
+    titre = models.CharField(max_length=255, unique=True)
     annee_sortie = models.IntegerField()
     affiche = models.BinaryField(null=True)  # longblob = BinaryField pour Django
     realisateur = models.CharField(max_length=255)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)  # "foreign key " vers categorie
 
 class Acteur(models.Model):
-    nom = models.CharField(max_length=255)
+    nom = models.CharField(max_length=255, )
     prenom = models.CharField(max_length=255)
     age = models.IntegerField()
     photos = models.BinaryField(null=True)
@@ -29,7 +29,7 @@ class Personne(models.Model):
         (AMATEUR, 'Amateur'),
     ]
 
-    pseudo = models.CharField(max_length=255)
+    pseudo = models.CharField(max_length=255, unique=True)
     nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255)
     mail = models.EmailField(max_length=255)
@@ -37,7 +37,7 @@ class Personne(models.Model):
     type = models.CharField(max_length=13, choices=TYPE_CHOICES)
 
 class Commentaire(models.Model):
-    film = models.ForeignKey(Film, on_delete=models.CASCADE)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, unique=True)
     personne = models.ForeignKey(Personne, on_delete=models.CASCADE)
     note = models.IntegerField()
     commentaire = models.TextField()

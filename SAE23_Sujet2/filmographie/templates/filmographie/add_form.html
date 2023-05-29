@@ -1,4 +1,4 @@
-{% extends "main.html" %} 
+{% extends "main_add_form.html" %} 
 
 
 
@@ -18,3 +18,22 @@
         poster un Commentaire
     {%endif%}
 {% endblock %}
+
+{%block test%}
+{% load test_add_form %}
+ 
+    {% if form|add_form == "Categorie_Form" %}
+        <form method="post" action="/filmographie/traitement/1/">
+    {% elif form|add_form == "Film_Form" %}
+        <form method="post" action="/filmographie/traitement/2/">
+    {% elif form|add_form == "Acteur_Form" %}
+        <form method="post" action="/filmographie/traitement/3/">
+    {% elif form|add_form == "FilmActeur_Form" %}
+        <form method="post" action="/filmographie/traitement/4/">
+    {% elif form|add_form == "Personne_Form" %}
+        <form method="post" action="/filmographie/traitement/5/">
+    {% elif form|add_form == "Commentaire_Form" %}
+        <form method="post" action="/filmographie/traitement/6/">
+    {%endif%}
+{%endblock%}
+
