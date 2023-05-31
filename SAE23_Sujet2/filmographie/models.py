@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Categorie(models.Model):
     nom = models.CharField(max_length=255, unique=True)
@@ -52,8 +53,8 @@ class Personne(models.Model):
         return self.nom
 
 class Commentaire(models.Model):
-    film = models.ForeignKey(Film, to_field="titre", on_delete=models.CASCADE)
-    personne = models.ForeignKey(Personne, to_field="pseudo", on_delete=models.CASCADE)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)
+    personne = models.ForeignKey(Personne, on_delete=models.CASCADE)
     note = models.IntegerField()
     commentaire = models.TextField()
-    date = models.DateField()
+    date = models.DateField(default=timezone.now().date())

@@ -37,10 +37,10 @@ def add_Film(request):
 def view_Film(request, id):
     film = models.Film.objects.get(pk=id)
     categorie = film.categorie
-    acteurs = models.Film_Acteur.objects.filter(film=film).values('acteur')
-    related_actors = models.Acteur.objects.filter(id__in=acteurs)
-
-    return render(request, 'filmographie/view_film.html', {'film':film, 'categorie':categorie, 'acteurs':related_actors})
+    liste = models.Film_Acteur.objects.filter(film=film).values('acteur')
+    acteurs = models.Acteur.objects.filter(id__in=liste)
+    coms = models.Commentaire.objects.filter(film=film)
+    return render(request, 'filmographie/view_film.html', {'film':film, 'categorie':categorie, 'acteurs':acteurs, 'commentaire':coms})
 
 def view_all_Film(request):
     id = "film"
@@ -58,9 +58,9 @@ def add_Acteur(request):
 
 def view_Acteur(request, id):
     acteur = models.Acteur.objects.get(pk=id)
-    films = models.Film_Acteur.objects.filter(acteur=acteur).values('film')
-    related_films = models.Film.objects.filter(id__in=films)
-    return render(request, 'filmographie/view_acteur.html', {'acteur':acteur, "films":related_films})
+    liste = models.Film_Acteur.objects.filter(acteur=acteur).values('film')
+    films = models.Film.objects.filter(id__in=liste)
+    return render(request, 'filmographie/view_acteur.html', {'acteur':acteur, "films":films})
 
 
 def view_all_Acteur(request):
@@ -77,7 +77,7 @@ def add_Personne(request):
 
 #def delete_Personne(request):
 
-#def view_Personne(request):
+#def view_Personne(request,id):
 
 #def view_all_Personne(request):
 
@@ -89,33 +89,11 @@ def add_Commentaire(request):
 
 #def delete_Commentaire(request):
 
-#def view_Commentaire(request):
-   
-#def view_all_Commentaire(request):
 
-'''def traitement(request, id):
-    if id == 1:
-        form = forms.Categorie_Form(request.POST)
-    elif id == 2:
-        form = forms.Film_Form(request.POST)
-    elif id == 3:
-        form = forms.Acteur_Form(request.POST)
-    #elif id == 4:
-        
-    elif id == 5 :
-        form = forms.Personne_Form(request.POST)
-    elif id == 6:
-        form = forms.Commentaire_Form(request.POST)
-    
-    if form.is_valid():# type: ignore
-        form.save()# type: ignore
-        return HttpResponseRedirect( "/filmographie/submitted/")
-    else:
-        return render(request, 'filmographie/add_form.html',{'form':form})# type: ignore
-  '''
+
 
 def traitement(request, id):
-    form_class_dict = {
+    test_forms = {
         1: forms.Categorie_Form,
         2: forms.Film_Form,
         3: forms.Acteur_Form,
@@ -124,17 +102,17 @@ def traitement(request, id):
         6: forms.Commentaire_Form,
     }
 
-    FormClass = form_class_dict.get(id)
-    if not FormClass:
-        return HttpResponseRedirect('/filmographie/')  # Handle invalid form ID case
+    filed_form = test_forms.get(id)
+    if not filed_form:
+        return HttpResponseRedirect('/filmographie/')  
 
     if request.method == 'POST':
-        form = FormClass(request.POST)
+        form = filed_form(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/filmographie/submitted/')
     else:
-        form = FormClass()
+        form = filed_form()
     return render(request, 'filmographie/add_form.html', {'form': form})  
 
 def submitted(request):

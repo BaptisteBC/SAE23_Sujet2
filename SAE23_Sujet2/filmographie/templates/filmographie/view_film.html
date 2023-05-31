@@ -13,7 +13,17 @@
     {% empty %}
     <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/'>ici</a></p>
     {% endfor %}
+    <a href='/filmographie/ajout/relation/'>Ajouter un/une acteur/actrice qui a joué dans ce film</a>
     <br>
     <p>commentaire et note apporté a ce film</p>
-    <!--faire les coms-->
-{%endblock%}
+    {% for com in commentaire %}
+    <div><a href="">{{com.personne.pseudo}}</a>
+        <p>{{com.note}}</p>
+        <p>{{com.date}}</p>
+        <p>{{com.commentaire}}</P>
+    </div>
+    {% empty %}
+    <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
+    {% endfor %}
+    <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
+    {%endblock%}

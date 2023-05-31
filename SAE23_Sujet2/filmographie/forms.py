@@ -73,12 +73,10 @@ class Personne_Form(ModelForm):
 class Commentaire_Form(ModelForm):
     class Meta:
         model = models.Commentaire
-        fields = ('film', 'personne', 'note', 'commentaire', 'date',)
+        fields = ('film', 'personne', 'note', 'commentaire',)
         labels = {
             'film': _('Film'),
             'personne': _('Personne'),
             'note': _('Note'),
             'commentaire': _('Commentaire'),
-            'date': _('Date'),
         }
-        localized_fields = ('date',)
