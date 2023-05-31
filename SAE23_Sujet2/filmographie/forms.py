@@ -67,8 +67,9 @@ class Personne_Form(ModelForm):
     def check_pseudo(self):
         pseudo = self.cleaned_data['pseudo']
         if models.Personne.objects.filter(pseudo=pseudo).exists():
-            raise ValidationError("This pseudo is already in use.")
+            raise ValidationError("Ce pseudo est déjà utilisé")
         return pseudo
+
 class Commentaire_Form(ModelForm):
     class Meta:
         model = models.Commentaire

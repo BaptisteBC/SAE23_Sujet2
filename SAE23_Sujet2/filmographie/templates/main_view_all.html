@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'filmographie/index.css'%}">
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <ol>
+            {%block list%}
+            {% for l in liste %}
+                <li>{{l}} date de parrution {{l.date_parution | date:"d/m/Y"}}
+                    <a href = "/filmographie/affiche/{{l.id}}/">afficher les détails</a>
+                    <a href = "/filmographie/delete/{{l.id}}/">effacer</a>
+                    <a href="/filmographie/update/{{l.id}}/">mise a jour du livre</a>
+                </li>
+            {% endfor %}
+            {%endblock%}
+        </ol>
+    </body>

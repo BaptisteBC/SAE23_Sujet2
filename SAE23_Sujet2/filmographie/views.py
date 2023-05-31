@@ -63,11 +63,9 @@ def add_Commentaire(request):
 
 #def delete_Commentaire(request):
 
-'''def view_Commentaire(request):
-    return render(request, 'filmographie/Commentaire.html')
-'''
+#def view_Commentaire(request):
+   
 #def view_all_Commentaire(request):
-
 
 def traitement(request, id):
     if id == 1:
