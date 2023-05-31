@@ -1,0 +1,9 @@
+{% extends "main_view.html"%}
+
+{%block title%} {{film.titre}} {%endblock%}
+{%block affiche%}
+<H1>{{film.titre}}</H1>
+    <p> sorti en {{film.annee_sortie}} </p>
+    <P> réalisé par {{film.realisateur}}</P>
+    <p> appartient a la catégorie {{film.categorie}}</p>
+{%endblock%}

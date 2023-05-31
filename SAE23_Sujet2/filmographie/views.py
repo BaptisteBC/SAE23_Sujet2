@@ -16,7 +16,10 @@ def add_Categorie(request):
 
 #def view_Categorie(request):
 
-#def view_all_Categorie(request):
+def view_all_Categorie(request):
+    id = "categorie"
+    liste = list(models.Categorie.objects.all())
+    return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
 
 def add_Film(request):
     form = forms.Film_Form
@@ -26,9 +29,15 @@ def add_Film(request):
 
 #def delete_Film(request):
 
-#def view_Film(request):
+def view_Film(request, id):
+    film = models.Film.objects.get(pk=id)
+    return render(request, 'filmographie/view_film.html', {'film':film})
 
-#def view_all_Film(request):
+def view_all_Film(request):
+    id = "film"
+    liste = list(models.Film.objects.all())
+    return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
+
 
 def add_Acteur(request):
     form = forms.Acteur_Form
@@ -40,7 +49,11 @@ def add_Acteur(request):
 
 #def view_Acteur(request):
 
-#def view_all_Acteur(request):
+def view_all_Acteur(request):
+    id = "acteur"
+    liste = list(models.Acteur.objects.all())
+    return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
+
 
 def add_Personne(request):
     form = forms.Personne_Form
@@ -67,7 +80,7 @@ def add_Commentaire(request):
    
 #def view_all_Commentaire(request):
 
-def traitement(request, id):
+'''def traitement(request, id):
     if id == 1:
         form = forms.Categorie_Form(request.POST)
     elif id == 2:
@@ -80,11 +93,35 @@ def traitement(request, id):
         form = forms.Personne_Form(request.POST)
     elif id == 6:
         form = forms.Commentaire_Form(request.POST)
-    if form.is_valid():
-        form.save()
+    
+    if form.is_valid():# type: ignore
+        form.save()# type: ignore
         return HttpResponseRedirect( "/filmographie/submitted/")
     else:
-        return render(request, 'filmographie/add_form.html',{'form':form})
-    
+        return render(request, 'filmographie/add_form.html',{'form':form})# type: ignore
+  '''
+
+def traitement(request, id):
+    form_class_dict = {
+        1: forms.Categorie_Form,
+        2: forms.Film_Form,
+        3: forms.Acteur_Form,
+        5: forms.Personne_Form,
+        6: forms.Commentaire_Form,
+    }
+
+    FormClass = form_class_dict.get(id)
+    if not FormClass:
+        return HttpResponseRedirect('/filmographie/')  # Handle invalid form ID case
+
+    if request.method == 'POST':
+        form = FormClass(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = FormClass()
+    return render(request, 'filmographie/add_form.html', {'form': form})  
+
 def submitted(request):
     return render(request, 'filmographie/submitted.html')

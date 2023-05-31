@@ -1,25 +1,22 @@
-<!---<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
     <head>
-        <title>Home</title>
-        <meta charset="UTF-8">
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'filmographie/main.css'%}">
+        <title>{% block title %} Film {% endblock %} </title>
     </head>
     <body>
-        <form>
-            <input aria-label="votre recherche">
-            <button type="submit">Rechercher</button>
-        </form>
-        <nav>
-            <a href="/filmographie/index">Home</a>
-            <a href="/filmographie/Commentaire">Commentaire</a>
-        </nav>
-
-    </body>
-</html>
--->
-{% extends "main.html" %} 
-
-{% block title %}
-    Home
-{% endblock %}
-
+        <header>
+            <form class="f1">
+                <input type="text" placeholder="Le film que vous voullez">
+                <button type="submit">Rechercher</button>
+            </form>
+            <nav>
+                <a href="/filmographie/">Home</a>
+                <a href="/filmographie/view_all/categorie/">Categorie</a>
+                <a href="/filmographie/view_all/film/">Films</a>
+                <a href="/filmographie/view_all/acteur/">Acteur</a>
+                <a href="/filmographie/inscription/">Sign In</a>
+            </nav>
+        </header>
+    

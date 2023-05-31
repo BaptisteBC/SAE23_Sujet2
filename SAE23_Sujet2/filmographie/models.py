@@ -13,10 +13,10 @@ class Film(models.Model):
     annee_sortie = models.IntegerField()
     affiche = models.BinaryField(null=True)  # longblob = BinaryField pour Django
     realisateur = models.CharField(max_length=255)
-    categorie = models.ForeignKey(Categorie, to_field="nom", on_delete=models.CASCADE)  # "foreign key " vers categorie
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)  # "foreign key " vers categorie sans le 'to_field'
     
     def __str__(self):
-        return self.nom
+        return self.titre
     
 
 class Acteur(models.Model):

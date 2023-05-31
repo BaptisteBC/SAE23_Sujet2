@@ -4,7 +4,7 @@
         {% load static %}
         <link rel="stylesheet" href="{%static 'filmographie/index.css'%}">
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>{%block title%}Title{%endblock%}</title>
     </head>
     <body>
         <header>
@@ -16,14 +16,8 @@
                 <a href="/filmographie/inscription/">Sign In</a>
             </nav>
         </header>
-        {%block titre%}<p1>dire le type d'élément afficher</p1>{%endblock%}
-        <div class = "d1">
-            {%block ajout%}
-            <h1>ici on ajoute</h1>
-            {%endblock%}
-        </div>
-        {% block list %}
-            <h1>ici c'est la liste</h1>
-        {%endblock%}
+    {%block affiche%}
+    <h1>c'est ici que sera afficher les détails</h1>
+    {%endblock%}
     </body>
-    </html>
+</html>

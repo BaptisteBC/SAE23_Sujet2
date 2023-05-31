@@ -1,0 +1,67 @@
+{% extends "main_view_all.html" %} 
+
+{%block titre%}
+    {%if id == "categorie"%} <!--affiche si catégorie-->
+        <h1>Voici toutes les catégorie resencées dans notre base de donnée</h1>
+    {%elif id == "film"%}<!--affiche si film-->
+        <h1>Voici tous les films rencencés dans notre base de donnée</h1>
+    {%elif id == "acteur"%}<!--affiche si acteur-->
+        <h1>Voici tous les acteurs rencencés dans notre base de donnée</h1>
+    {%endif%}
+{%endblock%}
+
+{%block ajout%}
+    {%if id == "categorie"%} <!--affiche si catégorie-->
+        <a href="/filmographie/ajout/categorie/">Ajouter une catégorie manquante</a>
+    {%elif id == "film"%}<!--affiche si film-->
+        <a href="/filmographie/ajout/film/">Ajouter un film manquant</a>
+    {%elif id == "acteur"%}<!--affiche si acteur-->
+        <a href="/filmographie/ajout/acteur/">Ajouter un acteur manquant</a>
+    {%endif%}
+{%endblock%}
+
+{%block list%}
+    {%if id == "categorie"%} <!--affiche si catégorie-->
+        {% if not liste %}
+                <h2>aucune catégorie n'a été resencée pour le moment, vous pouvez le faire en apuillant sur "Ajouter une catégorie manquante"</h2>
+            {% else %}
+            <div class = "d2">
+            {% for i in liste %}
+            <li class="list"> {{i.nom}}
+                <a class="deta" href="">Afficher les détails</a>
+                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
+                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
+            </li>
+            {% endfor %} 
+            </div>
+        {%endif%}
+    {%elif id == "film"%}<!--affiche si film-->
+        {% if not liste %}
+            <h2>Aucun Film n'a été resencé pour le moment, vous pouvez le faire en apuillant sur "Ajouter un Film manquante"</h2>
+        {% else %}
+        <div class = "d2">
+        {% for i in liste %}
+            <li class="list"> {{i.titre}}
+                <a class="deta" href="/filmographie/view/film/{{i.id}}/">Afficher les détails</a>
+                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
+                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
+            </li>
+        {% endfor %} 
+        </div> 
+        {%endif%} 
+    {%elif id == "acteur"%}<!--affiche si acteur-->
+        {% if not liste %}
+            <h2>Aucun Acteur n'a été resencé pour le moment, vous pouvez le faire en apuillant sur "Ajouter un acteur manquante"</h2>
+        {% else %}
+        <div class = "d2">
+        {% for i in liste %}
+            <li class="list"> {{i.nom}}
+                <a class="deta" href="">Afficher les détails</a>
+                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
+                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
+            </li>
+        {% endfor %} 
+        </div> 
+        {%endif%} 
+    {%endif%}
+{%endblock%}
