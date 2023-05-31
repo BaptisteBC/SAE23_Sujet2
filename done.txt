@@ -11,3 +11,4 @@ https://codinggear.blog/how-to-connect-mysql-database-with-django/#how-to-setup-
 
 
 -fait affichage film -> il reste plus qu'a recupérer les relation films/acteur et les coms
+-acteur c'est fait et les relation film acteur aussi

@@ -5,5 +5,15 @@
 <H1>{{film.titre}}</H1>
     <p> sorti en {{film.annee_sortie}} </p>
     <P> réalisé par {{film.realisateur}}</P>
-    <p> appartient a la catégorie {{film.categorie}}</p>
+    <p> appartient a la catégorie <a href="/filmographie/view/categorie/{{categorie.id}}">{{film.categorie}}</a></p>
+    <br>
+    <p>acteur ayant joué dans ce film</p>
+    {% for acteur in acteurs %}
+    <li><a href="/filmographie/view/acteur/{{acteur.id}}">{{acteur.nom}} {{acteur.prenom}}</a></li>
+    {% empty %}
+    <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/'>ici</a></p>
+    {% endfor %}
+    <br>
+    <p>commentaire et note apporté a ce film</p>
+    <!--faire les coms-->
 {%endblock%}

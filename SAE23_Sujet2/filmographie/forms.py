@@ -34,7 +34,7 @@ class Acteur_Form(ModelForm):
             #'photos': _('Photos'),
         }
 
-class FilmActeur_Form(ModelForm):
+class Relation_Form(ModelForm):
     class Meta:
         model = models.Film_Acteur
         fields = ('film', 'acteur',)

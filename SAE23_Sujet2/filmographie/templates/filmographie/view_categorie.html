@@ -1,0 +1,16 @@
+{% extends "main_view.html"%}
+
+{%block title%} {{categorie.nom}} {%endblock%}
+{%block affiche%}
+<H1>{{categorie.nom}}</H1>
+    <p> Déscription :</p>
+    <p> {{categorie.descriptif}}</p>
+
+    <h2>Films dans cette catégorie:</h2>
+    {% for film in films %}
+        <li><a href='/filmographie/view/film/{{film.id}}'>{{ film.titre }}</a></li>
+        
+    {% empty %}
+        <p>aucun film n'est recencé dans cette catégorie</p>
+    {% endfor %}
+{%endblock%}

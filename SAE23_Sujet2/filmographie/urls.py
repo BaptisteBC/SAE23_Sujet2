@@ -8,11 +8,14 @@ urlpatterns = [
     path('ajout/acteur/', views.add_Acteur),
     path('ajout/inscription/', views.add_Personne),
     path('ajout/commentaire/', views.add_Commentaire),
+    path('ajout/relation/', views.add_Relation),
     path('traitement/<int:id>/', views.traitement),
     path('submitted/', views.submitted),
     path('view_all/categorie/', views.view_all_Categorie),
     path('view_all/film/', views.view_all_Film),
     path('view_all/acteur/', views.view_all_Acteur),
-    path('view/film/<int:id>/', views.view_Film)
+    path('view/film/<int:id>/', views.view_Film),
+    path('view/categorie/<int:id>/', views.view_Categorie),
+    path('view/acteur/<int:id>/', views.view_Acteur),
 
 ]

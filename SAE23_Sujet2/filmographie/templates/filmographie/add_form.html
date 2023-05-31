@@ -10,7 +10,7 @@
         ajouter un Film
     {% elif form|add_form == "Acteur_Form" %}
         ajouter un acteur
-    {% elif form|add_form == "FilmActeur_Form" %}
+    {% elif form|add_form == "Relation_Form" %}
         ajouter une relation acteur/film
     {% elif form|add_form == "Personne_Form" %}
         Inscrition
@@ -28,7 +28,7 @@
         <form method="post" action="/filmographie/traitement/2/">
     {% elif form|add_form == "Acteur_Form" %}
         <form method="post" action="/filmographie/traitement/3/">
-    {% elif form|add_form == "FilmActeur_Form" %}
+    {% elif form|add_form == "Relation_Form" %}
         <form method="post" action="/filmographie/traitement/4/">
     {% elif form|add_form == "Personne_Form" %}
         <form method="post" action="/filmographie/traitement/5/">
