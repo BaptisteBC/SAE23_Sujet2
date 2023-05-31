@@ -1,6 +1,10 @@
 {% extends "main_view.html"%}
 
-{%block title%} {{film.titre}} {%endblock%}
+{%block title%} {{acteur.prenom}} {{acteur.nom}} {%endblock%}
+{%block CRUD%}
+<a href="/filmographie/update/acteur/{{acteur.id}}/">Mettre a jour les données de l'acteur</a>
+<a href="/filmographie/delete/acteur/{{acteur.id}}/">SUPRIMER L'ACTEUR</a>
+{%endblock%}
 {%block affiche%}
 <H1>{{acteur.nom}} {{acteur.prenom}}</H1>
 <br>

@@ -1,6 +1,10 @@
 {% extends "main_view.html"%}
 
 {%block title%} {{categorie.nom}} {%endblock%}
+{%block CRUD%}
+<a href="/filmographie/update/categorie/{{categorie.id}}/">Mettre a jour les informations de la catégorie</a>
+<a href="/filmographie/delete/categorie/{{categorie.id}}/">SUPRIMER LA CATÉGORIE</a>
+{%endblock%}
 {%block affiche%}
 <H1>{{categorie.nom}}</H1>
     <p> Déscription :</p>

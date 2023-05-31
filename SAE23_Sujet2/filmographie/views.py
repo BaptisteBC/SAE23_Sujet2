@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from . import forms
 from . import models
-# Create your views here.
 
 def index(request):
     return render(request, 'filmographie/index.html')
@@ -10,9 +9,12 @@ def add_Categorie(request):
     form = forms.Categorie_Form
     return render(request, 'filmographie/add_form.html', {"form" : form})
 
-#def update_Categorie(request):
+#def update_Categorie(request,id):
 
-#def delete_Categorie(request):
+def delete_Categorie(id):
+    categorie = models.Categorie.objects.get(pk=id)
+    categorie.delete()
+    return HttpResponseRedirect("/filmographie/view_all/categorie/")
 
 def view_Categorie(request, id):
     categorie = models.Categorie.objects.get(pk=id)
@@ -32,7 +34,10 @@ def add_Film(request):
 
 #def update_Film(request):
 
-#def delete_Film(request):
+def delete_Film(id):
+    film = models.Film.objects.get(pk=id)
+    film.delete()
+    return HttpResponseRedirect("/filmographie/view_all/film/")
 
 def view_Film(request, id):
     film = models.Film.objects.get(pk=id)
@@ -54,7 +59,10 @@ def add_Acteur(request):
 
 #def update_Acteur(request):
 
-#def delete_Acteur(request):
+def delete_Acteur(id):
+    acteur = models.Acteur.objects.get(pk=id)
+    acteur.delete()
+    return HttpResponseRedirect("/filmographie/view_all/acteur/")
 
 def view_Acteur(request, id):
     acteur = models.Acteur.objects.get(pk=id)
@@ -75,11 +83,15 @@ def add_Personne(request):
 
 #def update_Personne(request):
 
-#def delete_Personne(request):
+def delete_Personne(id):
+    personne = models.Personne.objects.get(pk=id)
+    personne.delete()
+    return HttpResponseRedirect("/filmographie/")
 
-#def view_Personne(request,id):
-
-#def view_all_Personne(request):
+def view_Personne(request,id):
+    personne = models.Personne.objects.get(pk=id)
+    coms = models.Commentaire.objects.filter(personne=personne)
+    return render(request, 'filmographie/view_user.html', {'user':personne, 'coms':coms})
 
 def add_Commentaire(request):
     form = forms.Commentaire_Form
@@ -87,7 +99,11 @@ def add_Commentaire(request):
 
 #def update_Commentaire(request):
 
-#def delete_Commentaire(request):
+def delete_Commentaire(request,id):
+    com = models.Commentaire.objects.get(pk=id)
+    personne = com.personne.id  # type: ignore
+    com.delete()
+    return HttpResponseRedirect(f"/filmographie/view/user/{personne}")
 
 
 

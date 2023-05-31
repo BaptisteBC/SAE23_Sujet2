@@ -57,4 +57,4 @@ class Commentaire(models.Model):
     personne = models.ForeignKey(Personne, on_delete=models.CASCADE)
     note = models.IntegerField()
     commentaire = models.TextField()
-    date = models.DateField(default=timezone.now().date())
+    date = models.DateField(default=timezone.now().date())  

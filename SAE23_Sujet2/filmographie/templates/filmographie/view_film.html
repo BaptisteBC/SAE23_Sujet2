@@ -1,6 +1,10 @@
 {% extends "main_view.html"%}
 
 {%block title%} {{film.titre}} {%endblock%}
+{%block CRUD%}
+<a href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a>
+<a href="/filmographie/delete/film/{{film.id}}/">SUPRIMER LE FILM</a>
+{%endblock%}
 {%block affiche%}
 <H1>{{film.titre}}</H1>
     <p> sorti en {{film.annee_sortie}} </p>
@@ -17,7 +21,7 @@
     <br>
     <p>commentaire et note apporté a ce film</p>
     {% for com in commentaire %}
-    <div><a href="">{{com.personne.pseudo}}</a>
+    <div><a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a>
         <p>{{com.note}}</p>
         <p>{{com.date}}</p>
         <p>{{com.commentaire}}</P>
