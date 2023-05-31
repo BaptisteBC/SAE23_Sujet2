@@ -18,39 +18,22 @@
         poster un Commentaire
     {%endif%}
 {% endblock %}
-{% block content %}
-
-{% load test_add_form %}
-    {% if form|add_form == "Categorie_Form" %}
-        ajouter une catégorie
-    {% elif form|add_form == "Film_Form" %}
-        ajouter un Film
-    {% elif form|add_form == "Acteur_Form" %}
-        ajouter un acteur
-    {% elif form|add_form == "Relation_Form" %}
-        ajouter une relation acteur/film
-    {% elif form|add_form == "Personne_Form" %}
-        Inscrition
-    {% elif form|add_form == "Commentaire_Form" %}
-        poster un Commentaire
-    {%endif%}
-{%endblock%}
 
 {%block test%}
 {% load test_add_form %}
  
     {% if form|add_form == "Categorie_Form" %}
-        <form method="post" action="/filmographie/traitement/1/">
+        <form method="post" action="/filmographie/traitement_update/1/">
     {% elif form|add_form == "Film_Form" %}
-        <form method="post" action="/filmographie/traitement/2/">
+        <form method="post" action="/filmographie/traitement_update/2/">
     {% elif form|add_form == "Acteur_Form" %}
-        <form method="post" action="/filmographie/traitement/3/">
+        <form method="post" action="/filmographie/traitement_update/3/">
     {% elif form|add_form == "Relation_Form" %}
-        <form method="post" action="/filmographie/traitement/4/">
+        <form method="post" action="/filmographie/traitement_update/4/">
     {% elif form|add_form == "Personne_Form" %}
-        <form method="post" action="/filmographie/traitement/5/">
+        <form method="post" action="/filmographie/traitement_update/5/">
     {% elif form|add_form == "Commentaire_Form" %}
-        <form method="post" action="/filmographie/traitement/6/">
+        <form method="post" action="/filmographie/traitement_update/6/">
     {%endif%}
 {%endblock%}
 

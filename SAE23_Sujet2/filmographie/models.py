@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 class Categorie(models.Model):
     nom = models.CharField(max_length=255, unique=True)
     descriptif = models.TextField(null = True, blank= True)
@@ -55,6 +55,9 @@ class Personne(models.Model):
 class Commentaire(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     personne = models.ForeignKey(Personne, on_delete=models.CASCADE)
-    note = models.IntegerField()
+    note = models.IntegerField(
+        default=1,
+        validators=[MaxValueValidator(5), MinValueValidator(0)]
+     )
     commentaire = models.TextField()
     date = models.DateField(default=timezone.now().date())  

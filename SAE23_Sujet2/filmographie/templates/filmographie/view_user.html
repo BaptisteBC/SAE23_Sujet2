@@ -19,10 +19,13 @@
             <p>{{com.note}}</p>
             <p>{{com.date}}</p>
             <p>{{com.commentaire}}</P>
+            <a href="/filmographie/update/commentaire/{{com.id}}/">modifier le commmentaire</a>
             <a href = "/filmographie/delete/commentaire/{{com.id}}/">suprimer le commentaire</a>
         </div>
     {%empty%}
         <p>vous n'avez pas encore poster de commentaires, cliquez <a href='/filmographie/ajout/commentaire/'>ici</a> pour poster votre premier</p>
     {% endfor %}
+    {%if coms%}
     <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
+    {%endif%}
     {%endblock%}

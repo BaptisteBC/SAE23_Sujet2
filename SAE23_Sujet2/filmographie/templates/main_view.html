@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'filmographie/index.css'%}">
+        <link rel="stylesheet" href="{%static 'filmographie/main.css'%}">
         <meta charset="UTF-8">
         <title>{%block title%}Title{%endblock%}</title>
     </head>
@@ -16,11 +16,15 @@
                 <a href="/filmographie/ajout/inscription/">Sign In</a>
             </nav>
         </header>
+    <div class="crud">
     {%block CRUD%}
     <p>pour le update et delete du CRUD</p>
     {%endblock%}
+    </div>
+    <div class="affiche">
     {%block affiche%}
     <h1>c'est ici que sera afficher les détails</h1>
     {%endblock%}
+    </div>
     </body>
 </html>

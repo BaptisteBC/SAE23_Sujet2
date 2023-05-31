@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'filmographie/index.css'%}">
+        <link rel="stylesheet" href="{%static 'filmographie/main.css'%}">
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
@@ -17,13 +17,15 @@
             </nav>
         </header>
         {%block titre%}<p1>dire le type d'élément afficher</p1>{%endblock%}
-        <div class = "d1">
+        <div class = "ajout">
             {%block ajout%}
             <h1>ici on ajoute</h1>
             {%endblock%}
         </div>
+        <div class="listall">
         {% block list %}
             <h1>ici c'est la liste</h1>
         {%endblock%}
+        </div>
     </body>
     </html>

@@ -7,10 +7,7 @@
     </head>
     <body>
         <header>
-            <form class="f1">
-                <input type="text" placeholder="Le film que vous voullez">
-                <button type="submit">Rechercher</button>
-            </form>
+            
             <nav>
                 <a href="/filmographie/">Home</a>
                 <a href="/filmographie/view_all/categorie/">Categorie</a>
@@ -19,9 +16,10 @@
                 <a href="/filmographie/inscription/">Sign In</a>
             </nav>
         </header>
-        {% block content %}
-
-        {% endblock %}
+        <h1>{% block content %}
+            titre
+        {% endblock %}</h1>
+            <div class="form">
         {% block form %}
             {%block test%}
             <form method="post" action="/filmographie/traitement/">
@@ -31,4 +29,5 @@
                 <input class="send" type="submit" value="terminer">
             </form>
         {%endblock%}
+            </div>
     </body>

@@ -29,8 +29,6 @@
             {% for i in liste %}
             <li class="list"> {{i.nom}}
                 <a class="deta" href="/filmographie/view/categorie/{{i.id}}/">Afficher les détails</a>
-                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
-                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
             </li>
             {% endfor %} 
             </div>
@@ -43,8 +41,6 @@
         {% for i in liste %}
             <li class="list"> {{i.titre}}
                 <a class="deta" href="/filmographie/view/film/{{i.id}}/">Afficher les détails</a>
-                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
-                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
             </li>
         {% endfor %} 
         </div> 
@@ -57,8 +53,6 @@
         {% for i in liste %}
             <li class="list"> {{i.nom}}
                 <a class="deta" href="/filmographie/view/acteur/{{i.id}}">Afficher les détails</a>
-                <a class="supp" href = "/filmographie/delete/categorie/{{i.id}}/">Effacer</a>
-                <a class="up" href="/filmographie/update/categorie/{{i.id}}/">Mettre a jour</a>
             </li>
         {% endfor %} 
         </div> 

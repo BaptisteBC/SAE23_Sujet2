@@ -2,11 +2,12 @@
 
 {%block title%} {{film.titre}} {%endblock%}
 {%block CRUD%}
-<a href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a>
+<a href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a><br>
 <a href="/filmographie/delete/film/{{film.id}}/">SUPRIMER LE FILM</a>
 {%endblock%}
 {%block affiche%}
 <H1>{{film.titre}}</H1>
+    <p>Note moyenne {{moyenne}}/5</p>
     <p> sorti en {{film.annee_sortie}} </p>
     <P> réalisé par {{film.realisateur}}</P>
     <p> appartient a la catégorie <a href="/filmographie/view/categorie/{{categorie.id}}">{{film.categorie}}</a></p>
@@ -17,7 +18,9 @@
     {% empty %}
     <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/'>ici</a></p>
     {% endfor %}
+    {%if acteurs%}
     <a href='/filmographie/ajout/relation/'>Ajouter un/une acteur/actrice qui a joué dans ce film</a>
+    {%endif%}
     <br>
     <p>commentaire et note apporté a ce film</p>
     {% for com in commentaire %}
@@ -29,5 +32,7 @@
     {% empty %}
     <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
     {% endfor %}
+    {%if commentaire%}
     <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
+    {%endif%}
     {%endblock%}

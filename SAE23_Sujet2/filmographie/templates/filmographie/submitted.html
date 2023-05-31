@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        {% load static %}
-        <!--<link rel="stylesheet" href="{%static 'filmographie/main.css'%}">-->
-        <title>{% block title %} ajouté {% endblock %} </title>
-    </head>
-    <body>
+{% extends "main.html" %} 
+
+{%block content%}
         <h1>Merci d'avoir contribuer à notre base de donnée</h1>
         <a href="/filmographie/">retourner à l'acceuil </a>
-    </body>
+{%endblock%}

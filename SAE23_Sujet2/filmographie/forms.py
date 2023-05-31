@@ -77,6 +77,6 @@ class Commentaire_Form(ModelForm):
         labels = {
             'film': _('Film'),
             'personne': _('Personne'),
-            'note': _('Note'),
+            'note': _('Note /5'),
             'commentaire': _('Commentaire'),
         }

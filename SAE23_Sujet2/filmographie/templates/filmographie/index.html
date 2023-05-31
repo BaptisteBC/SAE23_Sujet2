@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        {% load static %}
-        <link rel="stylesheet" href="{%static 'filmographie/main.css'%}">
-        <title>{% block title %} Film {% endblock %} </title>
-    </head>
-    <body>
-        <header>
-            <form class="f1">
-                <input type="text" placeholder="Le film que vous voullez">
-                <button type="submit">Rechercher</button>
-            </form>
-            <nav>
-                <a href="/filmographie/">Home</a>
-                <a href="/filmographie/view_all/categorie/">Categorie</a>
-                <a href="/filmographie/view_all/film/">Films</a>
-                <a href="/filmographie/view_all/acteur/">Acteur</a>
-                <a href="/filmographie/ajout/inscription/">Sign In</a>
-            </nav>
-        </header>
-    
+{% extends "main.html" %} 
+
+{%block content%}
+<H1> Bien venu sur le site du Groupe 2 </H1>
+<h2> SAÉ 2.03 Sujet: Filmographie</h2>
+<h3> ROLLI Samuel RT111</h3>
+<h3> POELLEN Dorian RT112</h3>
+<h3> BLANC-CARRIER Baptiste RT111</h3>
+{%endblock%}
