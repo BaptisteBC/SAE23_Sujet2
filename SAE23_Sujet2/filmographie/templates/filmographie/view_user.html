@@ -2,25 +2,28 @@
 
 {%block title%} {{user.pseudo}} {%endblock%}
 {%block CRUD%}
-<a href="/filmographie/update/user/{{user.id}}/">Mettre a jour les données de l'utilisateur</a>
-<a href="/filmographie/delete/user/{{user.id}}/">SUPRIMER L'UTILISATEUR</a>
+<a class="update" href="/filmographie/update/user/{{user.id}}/">Mettre a jour les données de l'utilisateur</a>
+<a  class="supp" href="/filmographie/delete/user/{{user.id}}/">SUPRIMER L'UTILISATEUR</a>
 {%endblock%}
 {%block affiche%}
+<div class=film>
+
 <H1>{{film.titre}}</H1>
     <h1> {{user.prenom}} {{user.nom}} </h1>
     <P> contacte: {{user.mail}}</p>
     <p> type d'utilisateur: {{user.type}}</p>
     
     <br>
-    <p>cet utilisateur à commenter sur :</p>
+    <H2 class="com_titre">cet utilisateur à commenter sur :</h2>
+    <div class="coms">
     {%for com in coms%}
-        <div>
+        <div class="com">
             <a href="/filmographie/view/film/{{com.film.id}}/">{{com.film.titre}}</a>
             <p>{{com.note}}</p>
             <p>{{com.date}}</p>
             <p>{{com.commentaire}}</P>
-            <a href="/filmographie/update/commentaire/{{com.id}}/">modifier le commmentaire</a>
-            <a href = "/filmographie/delete/commentaire/{{com.id}}/">suprimer le commentaire</a>
+            <a class="update" href="/filmographie/update/commentaire/{{com.id}}/">modifier</a>
+            <a class="supp" href = "/filmographie/delete/commentaire/{{com.id}}/">suprimer</a>
         </div>
     {%empty%}
         <p>vous n'avez pas encore poster de commentaires, cliquez <a href='/filmographie/ajout/commentaire/'>ici</a> pour poster votre premier</p>
@@ -28,4 +31,6 @@
     {%if coms%}
     <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
     {%endif%}
+</div>
+</div>
     {%endblock%}

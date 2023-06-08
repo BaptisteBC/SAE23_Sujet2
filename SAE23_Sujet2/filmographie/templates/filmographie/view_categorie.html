@@ -2,8 +2,8 @@
 
 {%block title%} {{categorie.nom}} {%endblock%}
 {%block CRUD%}
-<a href="/filmographie/update/categorie/{{categorie.id}}/">Mettre a jour les informations de la catégorie</a>
-<a href="/filmographie/delete/categorie/{{categorie.id}}/">SUPRIMER LA CATÉGORIE</a>
+<a class="update" href="/filmographie/update/categorie/{{categorie.id}}/">Mettre a jour les informations de la catégorie</a>
+<a  class="supp" href="/filmographie/delete/categorie/{{categorie.id}}/">SUPRIMER LA CATÉGORIE</a>
 {%endblock%}
 {%block affiche%}
 <H1>catégorie: {{categorie.nom}}</H1>

@@ -2,16 +2,23 @@
 
 {%block title%} {{acteur.prenom}} {{acteur.nom}} {%endblock%}
 {%block CRUD%}
-<a href="/filmographie/update/acteur/{{acteur.id}}/">Mettre a jour les données de l'acteur</a><br>
-<a href="/filmographie/delete/acteur/{{acteur.id}}/">SUPRIMER L'ACTEUR</a>
+<a class="update" href="/filmographie/update/acteur/{{acteur.id}}/">Mettre a jour les données de l'acteur</a><br>
+<a  class="supp" href="/filmographie/delete/acteur/{{acteur.id}}/">SUPRIMER L'ACTEUR</a>
 {%endblock%}
 {%block affiche%}
+<div class="page_acteur">
+<div class="info">
 <H1>{{acteur.nom}} {{acteur.prenom}}</H1>
 <br>
 <p> {{acteur.nom}} {{acteur.prenom}} a {{acteur.age}} ans</p>
-<p> Film dans lesquels a joué {{acteur.nom}} {{acteur.prenom}}:</p>
+{% if acteur.photos %}
+    <img src="{{ acteur.photos.url }}" alt="Photo de l'acteur">
+{% endif %}
+<h2 class = "act_titre"> Film dans lesquels a joué {{acteur.nom}} {{acteur.prenom}}:</h2>
+</div>
+<div class="list_film">
     {% for film in films %}
-        <li><a href='/filmographie/view/film/{{film.id}}'>{{ film.titre }}</a></li>
+        <li class="film_act"><a href='/filmographie/view/film/{{film.id}}'>{{ film.titre }}</a></li>
         
     {% empty %}
         <p>aucun film n'est recencé pour cet acteur n'hésitez pas a en ajouter en cliquant <a href="/filmographie/ajout/relation/">ici</a></p>
@@ -19,4 +26,6 @@
     {%if films%}
     <a href="/filmographie/ajout/relation/">Ajouter un film dans le quel {{acteur.prenom}} {{acteur.nom}} a joué</a>
     {%endif%}
+</div>
+</div>
 {%endblock%}

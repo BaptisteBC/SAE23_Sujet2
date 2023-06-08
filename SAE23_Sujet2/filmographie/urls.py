@@ -29,4 +29,6 @@ urlpatterns = [
     path('update/user/<int:id>/', views.update_Personne),
     path('update/commentaire/<int:id>/', views.update_Commentaire),
     path('traitement_update/<int:id>/',views.traitement_update),
+    #path('upload/', views.upload_csv, name='upload_csv'),
+
 ]

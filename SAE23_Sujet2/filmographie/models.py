@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from PIL import Image
+
+
 class Categorie(models.Model):
     nom = models.CharField(max_length=255, unique=True)
     descriptif = models.TextField(null = True, blank= True)
@@ -12,7 +15,7 @@ class Categorie(models.Model):
 class Film(models.Model):
     titre = models.CharField(max_length=255, unique=True)
     annee_sortie = models.IntegerField()
-    affiche = models.BinaryField(null=True)  # longblob = BinaryField pour Django
+    affiche = models.ImageField(upload_to='filmographie/images/', null=True)  #NE PAS OUBLIER D'AJOUTER LE TRUC A LA FIN DE SETTINGS, AUSSI DANS URLS.PY et SURTOUT le truc DANS LE HTML
     realisateur = models.CharField(max_length=255)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)  # "foreign key " vers categorie sans le 'to_field'
     
@@ -24,7 +27,7 @@ class Acteur(models.Model):
     nom = models.CharField(max_length=255, unique=True)
     prenom = models.CharField(max_length=255)
     age = models.IntegerField()
-    photos = models.BinaryField(null=True)
+    photos = models.ImageField(upload_to='filmographie/images/', null=True)
     
     def __str__(self):
         return self.nom

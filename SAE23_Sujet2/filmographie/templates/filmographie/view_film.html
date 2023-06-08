@@ -2,37 +2,47 @@
 
 {%block title%} {{film.titre}} {%endblock%}
 {%block CRUD%}
-<a href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a><br>
-<a href="/filmographie/delete/film/{{film.id}}/">SUPRIMER LE FILM</a>
+<a class="update" href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a>
+<a class="supp" href="/filmographie/delete/film/{{film.id}}/">SUPRIMER LE FILM</a>
 {%endblock%}
 {%block affiche%}
+<div class=film>
+    <div class="p1_film">
 <H1>{{film.titre}}</H1>
     <p>Note moyenne {{moyenne}}/5</p>
     <p> sorti en {{film.annee_sortie}} </p>
     <P> réalisé par {{film.realisateur}}</P>
     <p> appartient a la catégorie <a href="/filmographie/view/categorie/{{categorie.id}}">{{film.categorie}}</a></p>
-    <br>
-    <p>acteur ayant joué dans ce film</p>
+    </div>
+    <h2 class="act_titre">acteur ayant joué dans ce film</h2>
+    <div class="act_film">
     {% for acteur in acteurs %}
+    <div class="act">
     <li><a href="/filmographie/view/acteur/{{acteur.id}}">{{acteur.nom}} {{acteur.prenom}}</a></li>
+    </div>  
     {% empty %}
     <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/'>ici</a></p>
     {% endfor %}
     {%if acteurs%}
-    <a href='/filmographie/ajout/relation/'>Ajouter un/une acteur/actrice qui a joué dans ce film</a>
+    <a class="add_act" href='/filmographie/ajout/relation/'>Ajouter un/une acteur/actrice<br> qui a joué dans ce film</a>
     {%endif%}
-    <br>
-    <p>commentaire et note apporté a ce film</p>
+    </div>
+    <h2 class="com_titre">commentaire et note apporté a ce film</h2>
+    <div class="coms">
     {% for com in commentaire %}
-    <div><a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a>
-        <p>{{com.note}}</p>
-        <p>{{com.date}}</p>
+    <div class="com">
+        <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
+        <p>note: {{com.note}}/5</p>
+        <p>posté le: {{com.date}}</p>
+        <p>commentaire: </p>
         <p>{{com.commentaire}}</P>
     </div>
     {% empty %}
-    <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
+    <p>nous ne rensençons aucun commentaire pour ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
     {% endfor %}
     {%if commentaire%}
     <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
     {%endif%}
+    </div>
     {%endblock%}
+</div>

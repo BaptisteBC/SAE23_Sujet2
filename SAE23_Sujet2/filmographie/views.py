@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from . import forms
 from . import models
+import csv
 
 def index(request):
     return render(request, 'filmographie/index.html')
@@ -165,17 +166,17 @@ def traitement(request, id):
         6: forms.Commentaire_Form,
     }
 
-    filed_form = test_forms.get(id)
-    if not filed_form:
+    class_form = test_forms.get(id)
+    if not class_form:
         return HttpResponseRedirect('/filmographie/')  
 
     if request.method == 'POST':
-        form = filed_form(request.POST)
+        form = class_form(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/filmographie/submitted/')
     else:
-        form = filed_form()
+        form = class_form()
     return render(request, 'filmographie/add_form.html', {'form': form})  
 
 
@@ -202,3 +203,19 @@ def traitement_update(request, id):
     else:
         return render(request, 'filmographie/update_form.html',{'form':form, 'id':id})# type: ignore
 
+
+
+
+
+'''
+def upload_csv(request):
+    if request.method == 'POST' and request.FILES['csv_file']:
+        csv_file = request.FILES['csv_file']
+        if csv_file.name.endswith('.csv'):
+            data_reader = csv.reader(csv_file)
+            for row in data_reader:
+                col1, col2 = row
+                # Create a new instance of YourModel and save it to the database
+                models.Categorie.objects.create(nom=col1, descriptif=col2)
+            return render(request, '/filmographie/submitted.html')
+    return render(request, '/filmographie/index.html')'''

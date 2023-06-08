@@ -14,25 +14,32 @@ class Categorie_Form(ModelForm):
 class Film_Form(ModelForm):
     class Meta:
         model = models.Film
-        fields = ('titre', 'annee_sortie',  'realisateur', 'categorie',) # test sans 'affiche',
+        fields = ('titre', 'annee_sortie',  'realisateur', 'categorie','affiche',) 
         labels = {
             'titre': _('Titre'),
             'annee_sortie': _('Année de sortie'),
-            #'affiche': _('Affiche'),
             'realisateur': _('Réalisateur'),
             'categorie': _('Categorie'),
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['photos'].widget.attrs.update({'accept': 'image/*'})
 
 class Acteur_Form(ModelForm):
     class Meta:
         model = models.Acteur
-        fields = ('nom', 'prenom', 'age', )# test sans 'photos',
+        fields = ('nom', 'prenom', 'age', 'photos',)
         labels = {
             'nom': _('Nom'),
             'prenom': _('Prénom'),
             'age': _('Âge'),
-            #'photos': _('Photos'),
+            'photos': _('Photos'),
+            
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['photos'].widget.attrs.update({'accept': 'image/*'})
+
 
 class Relation_Form(ModelForm):
     class Meta:

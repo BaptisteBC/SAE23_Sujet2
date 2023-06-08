@@ -74,11 +74,15 @@ input{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.crud a{
-    color: red;
+    padding: 5px 0px 15px 0px;
 }
 
+.update{
+    color:dodgerblue ;
+}
+.supp{
+    color: firebrick;
+}
 .contenu{
     display: flex;
     flex-wrap: wrap;
@@ -86,5 +90,71 @@ input{
     align-items: center;
 }
 .contenu p{
+    font-size: 20px;
+}
+
+
+
+.film{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.film p{
+    padding: 5px 0px 5px 0px;
+
+}
+
+.p1_film{
+    background-color: rgba(211, 208, 208, 0.164);
+    border-radius: 10px;
+
+    MARGIN: 15px 0px 15px 0px;
+}
+
+.p1_film p{
+    padding: 0px 15px 0px 15px;
+    font-size: 25px;
+}
+
+.com_titre, .act_titre{
+    padding:  5px 0px 5px 0px;
+
+}
+.com, .act{
+    margin: 5px;
+    padding: 5px;
+    background-color: rgba(211, 208, 208, 0.527);
+    border-radius: 10px;
+}
+
+.act_film{
+    padding-bottom: 40px;
+}
+
+.add_act{
+    display: flex;
+    justify-content: center;
+}
+
+.page_acteur{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.film_act{
+    margin: 5px;
+    padding: 5px;
+    background-color: rgba(211, 208, 208, 0.527);
+    border-radius: 10px;
+}
+
+.page_acteur p{
+    text-align: center;
     font-size: 20px;
 }
