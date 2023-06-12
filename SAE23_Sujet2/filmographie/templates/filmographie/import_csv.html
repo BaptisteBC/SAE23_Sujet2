@@ -1,0 +1,22 @@
+{% extends "main_add_form.html" %} 
+{% block title %}
+    ajouter un film depuis un fichier csv
+{% endblock %}
+
+{% block content %}
+    ajouter un film depuis un fichier csv
+
+{%endblock%}
+{%block autre%}
+<div class='consigne'>
+<p>Pour ajouter un ou plusieur films, veuillez importer un fichier .csv respectant la mise en page suivante</p>
+<br>
+<p>titre du film, année de sortie, le realisteur, la categorie, le nom du 1er acteur/son prenom,  le nom du 2e acteur/son prenom, etc... </p>
+</div>
+{%endblock%}
+
+{%block test%}
+   
+    <form method="post" action="/filmographie/upload/" enctype="multipart/form-data">
+
+{%endblock%}

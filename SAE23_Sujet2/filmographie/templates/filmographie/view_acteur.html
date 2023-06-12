@@ -7,13 +7,18 @@
 {%endblock%}
 {%block affiche%}
 <div class="page_acteur">
+    {% if acteur.photos %}
+    <img class='acteur_photo' src="{{ acteur.photos.url }}" alt="Photo de l'acteur">
+{% endif %}
 <div class="info">
 <H1>{{acteur.nom}} {{acteur.prenom}}</H1>
 <br>
+{% if acteur.age%}
 <p> {{acteur.nom}} {{acteur.prenom}} a {{acteur.age}} ans</p>
-{% if acteur.photos %}
-    <img src="{{ acteur.photos.url }}" alt="Photo de l'acteur">
-{% endif %}
+{%else%}
+<p> {{acteur.nom}} {{acteur.prenom}} </p>
+{%endif%}
+
 <h2 class = "act_titre"> Film dans lesquels a joué {{acteur.nom}} {{acteur.prenom}}:</h2>
 </div>
 <div class="list_film">

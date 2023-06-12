@@ -4,12 +4,20 @@
 {%block CRUD%}
 <a class="update" href="/filmographie/update/film/{{film.id}}/">Mettre a jour les informations du film</a>
 <a class="supp" href="/filmographie/delete/film/{{film.id}}/">SUPRIMER LE FILM</a>
+<a class="download" href="/filmographie/download/pdf/{{ film.id }}/">Télécharger le PDF</a>
 {%endblock%}
 {%block affiche%}
 <div class=film>
+    {% if film.affiche %}
+    <img class='affiche_film'src="{{ film.affiche.url }}" alt="affiche du film">
+{% endif %}
     <div class="p1_film">
 <H1>{{film.titre}}</H1>
+    {%if moyenne%}
     <p>Note moyenne {{moyenne}}/5</p>
+    {%else%}
+    <p> aucune note n'a été donnée pour le moment</p>
+    {%endif%}
     <p> sorti en {{film.annee_sortie}} </p>
     <P> réalisé par {{film.realisateur}}</P>
     <p> appartient a la catégorie <a href="/filmographie/view/categorie/{{categorie.id}}">{{film.categorie}}</a></p>
@@ -29,10 +37,49 @@
     </div>
     <h2 class="com_titre">commentaire et note apporté a ce film</h2>
     <div class="coms">
+    {% for com in best %}
+    <h4>Meilleur commentaire</h4>
+    <div class="com">
+        <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
+        {%if com.note%}
+        <p>note: {{com.note}}/5</p>
+        {%else%}
+        <p>note: non renseignée</p>
+        {%endif%}
+        <p>posté le: {{com.date}}</p>
+        <p>commentaire: </p>
+        <p>{{com.commentaire}}</P>
+    </div>
+    {% empty %}
+
+    {% endfor %}
+    {% for com in pire %}
+    {% if pire.all|length != best.all|length %}
+    <h4>Pire commentaire</h4>
+    <div class="com">
+        <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
+        {%if com.note%}
+        <p>note: {{com.note}}/5</p>
+        {%else%}
+        <p>note: non renseignée</p>
+        {%endif%}
+        <p>posté le: {{com.date}}</p>
+        <p>commentaire: </p>
+        <p>{{com.commentaire}}</P>
+    </div>
+    {%endif%}
+    {% empty %}
+
+    {% endfor %}
+    <h4>Commentaires</h4>
     {% for com in commentaire %}
     <div class="com">
         <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
+        {%if com.note%}
         <p>note: {{com.note}}/5</p>
+        {%else%}
+        <p>note: non renseignée</p>
+        {%endif%}
         <p>posté le: {{com.date}}</p>
         <p>commentaire: </p>
         <p>{{com.commentaire}}</P>
@@ -40,6 +87,7 @@
     {% empty %}
     <p>nous ne rensençons aucun commentaire pour ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
     {% endfor %}
+
     {%if commentaire%}
     <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
     {%endif%}

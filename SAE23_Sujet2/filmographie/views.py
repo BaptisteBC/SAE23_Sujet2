@@ -2,10 +2,36 @@ from django.shortcuts import render, HttpResponseRedirect
 from . import forms
 from . import models
 import csv
+from io import TextIOWrapper
+#from django.http import FileResponse
+
+
+def import_films_csv(csv_file):
+    reader = csv.reader(TextIOWrapper(csv_file, encoding='utf-8'))
+    next(reader)
+    for row in reader:
+        titre_film = row[0]
+        annee_sortie = row[1]
+        realisateur = row[2]
+        categorie = row[3]
+        nom_prenom_acteur = row[4:]
+        categorie, _ = models.Categorie.objects.get_or_create(nom=categorie)
+        film, _= models.Film.objects.get_or_create(titre=titre_film, annee_sortie=annee_sortie, realisateur=realisateur, categorie=categorie)            
+
+        for i in nom_prenom_acteur:
+            x = i.split("/")
+            nom_acteur = x[0]
+            if len(x)>1:
+                prenom_acteur = x[1]
+            
+            acteur, _ = models.Acteur.objects.get_or_create(nom=nom_acteur, prenom=prenom_acteur)  # type: ignore
+            models.Film_Acteur.objects.create(film=film, acteur=acteur)
 
 def index(request):
     return render(request, 'filmographie/index.html')
 
+def submitted(request):
+    return render(request, 'filmographie/submitted.html')
 
 
 def note_moy(id):
@@ -23,6 +49,7 @@ def note_moy(id):
         return None
 
 
+#Consernant les Catégorie
 
 def add_Categorie(request):
     form = forms.Categorie_Form
@@ -48,7 +75,7 @@ def view_all_Categorie(request):
     liste = list(models.Categorie.objects.all())
     return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
 
-
+#Consernant les films
 
 def add_Film(request):
     form = forms.Film_Form
@@ -70,8 +97,10 @@ def view_Film(request, id):
     liste = models.Film_Acteur.objects.filter(film=film).values('acteur')
     acteurs = models.Acteur.objects.filter(id__in=liste)
     coms = models.Commentaire.objects.filter(film=film)
+    meilleur_note = models.Commentaire.objects.filter(film=film).order_by('-note')[:1]
+    pire_note = models.Commentaire.objects.filter(film=film).order_by('note')[:1]
     note = note_moy(id)
-    return render(request, 'filmographie/view_film.html', {'film':film, 'categorie':categorie, 'acteurs':acteurs, 'commentaire':coms, 'moyenne':note})
+    return render(request, 'filmographie/view_film.html', {'film':film, 'categorie':categorie, 'acteurs':acteurs, 'best':meilleur_note, 'pire':pire_note, 'commentaire':coms, 'moyenne':note})
 
 def view_all_Film(request):
     id = "film"
@@ -79,6 +108,8 @@ def view_all_Film(request):
     return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
 
 
+
+#Consernant les acteurs
 
 def add_Acteur(request):
     form = forms.Acteur_Form
@@ -106,6 +137,7 @@ def view_all_Acteur(request):
     return render(request, 'filmographie/view_all.html',{'liste':liste, "id":id})
 
 
+#Consernant les personnes
 
 def add_Personne(request):
     form = forms.Personne_Form
@@ -128,6 +160,9 @@ def view_Personne(request,id):
 
 
 
+#Consernant les Commentaires
+
+
 def add_Commentaire(request):
     form = forms.Commentaire_Form
     return render(request, 'filmographie/add_form.html', {'form': form, 'test':form})
@@ -145,15 +180,16 @@ def delete_Commentaire(request,id):
 
 
 
-def submitted(request):
-    return render(request, 'filmographie/submitted.html')
 
-
+#Consernant les relation films acteurs
 
 def add_Relation(request):
     form = forms.Relation_Form
     return render(request, 'filmographie/add_form.html', {"form" : form})
 
+
+
+#Consernant le traitement des ajout et des updates
 
 
 def traitement(request, id):
@@ -181,41 +217,109 @@ def traitement(request, id):
 
 
 
-def traitement_update(request, id):
-    if id == 1:
-        form = forms.Categorie_Form(request.POST)
-    elif id == 2:
-        form = forms.Film_Form(request.POST)
-    elif id == 3:
-        form = forms.Acteur_Form(request.POST)
-    elif id == 4:
-        form = forms.Relation_Form(request.POST)
-    elif id == 5 :
-        form = forms.Personne_Form(request.POST)
-    elif id == 6:
-        form = forms.Commentaire_Form(request.POST)
+
     
-    if form.is_valid():# type: ignore
-        objct = form.save(commit=False)# type: ignore
-        objct.id = id
-        objct.save()
-        return HttpResponseRedirect( "/filmographie/submitted/")
+
+def add_Film_csv(request):
+    form = forms.ImportFilmCsv
+    return render(request, 'filmographie/import_csv.html', {"form" : form})
+
+def import_films(request):
+    if request.method == 'POST':
+        form = forms.ImportFilmCsv(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = request.FILES['csv_file']
+            import_films_csv(csv_file)
+            return render(request, 'filmographie/submitted.html')
     else:
-        return render(request, 'filmographie/update_form.html',{'form':form, 'id':id})# type: ignore
+        form = forms.ImportFilmCsv()
+    
+    return render(request, 'filmographie/import_csv.html', {'form': form})
 
 
+def traitement_up_Cat(request, id):
+    categorie = models.Categorie.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Categorie_Form(request.POST, instance=categorie)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Categorie_Form(instance=categorie)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
 
+def traitement_up_Film(request, id):
+    film = models.Film.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Film_Form(request.POST, request.FILES, instance=film)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Categorie_Form(instance=film)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
 
+def traitement_up_Act(request, id):
+    acteur = models.Acteur.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Acteur_Form(request.POST, request.FILES, instance=acteur)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Acteur_Form(instance=acteur)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
+
+def traitement_up_Pers(request, id):
+    pesonne = models.Personne.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Personne_Form(request.POST, instance=pesonne)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Personne_Form(instance=pesonne)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
+
+def traitement_up_Com(request, id):
+    com = models.Commentaire.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Commentaire_Form(request.POST, instance=com)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Commentaire_Form(instance=com)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
+
+def traitement_up_Rel(request, id):
+    rel = models.Film_Acteur.objects.get(pk=id)
+    if request.method == 'POST':
+        form = forms.Relation_Form(request.POST, instance=rel)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/filmographie/submitted/')
+    else:
+        form = forms.Relation_Form(instance=rel)
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
 
 '''
-def upload_csv(request):
-    if request.method == 'POST' and request.FILES['csv_file']:
-        csv_file = request.FILES['csv_file']
-        if csv_file.name.endswith('.csv'):
-            data_reader = csv.reader(csv_file)
-            for row in data_reader:
-                col1, col2 = row
-                # Create a new instance of YourModel and save it to the database
-                models.Categorie.objects.create(nom=col1, descriptif=col2)
-            return render(request, '/filmographie/submitted.html')
-    return render(request, '/filmographie/index.html')'''
+def traitement_update(request, id, id_obj):
+    test_forms = {
+        1: forms.Categorie_Form,
+        2: forms.Film_Form,
+        3: forms.Acteur_Form,
+        4: forms.Relation_Form,
+        5: forms.Personne_Form,
+        6: forms.Commentaire_Form,
+    }
+    class_form = test_forms.get(id)
+    if not class_form:
+        return HttpResponseRedirect('/filmographie/') 
+    form = class_form(request.POST, request.FILES)
+    if form.is_valid():
+        objet = form.save(commit=False)
+        objet.id = id_obj
+        objet.save()
+        return HttpResponseRedirect('/filmographie/submitted/')
+    return render(request, 'filmographie/add_form.html', {'form': form})  '''

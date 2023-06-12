@@ -158,3 +158,11 @@ input{
     text-align: center;
     font-size: 20px;
 }
+
+.affiche_film, .acteur_photo{
+    width: 10%;
+}
+
+.consigne{
+    text-align: center;
+}

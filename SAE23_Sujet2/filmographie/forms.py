@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField, ValidationError
+from django.forms import ModelForm, ChoiceField, ValidationError, Form, FileField
 from django.utils.translation import gettext_lazy as _
 from . import models
 
@@ -20,10 +20,11 @@ class Film_Form(ModelForm):
             'annee_sortie': _('Année de sortie'),
             'realisateur': _('Réalisateur'),
             'categorie': _('Categorie'),
+            'affiche': _('Affiche du film'),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['photos'].widget.attrs.update({'accept': 'image/*'})
+        self.fields['affiche'].widget.attrs.update({'accept': 'image/*'})
 
 class Acteur_Form(ModelForm):
     class Meta:
@@ -87,3 +88,6 @@ class Commentaire_Form(ModelForm):
             'note': _('Note /5'),
             'commentaire': _('Commentaire'),
         }
+
+class ImportFilmCsv(Form):
+    csv_file = FileField(label='CSV File')

@@ -5,35 +5,51 @@
 {% block title %}
     {% load test_add_form %}
     {% if form|add_form == "Categorie_Form" %}
-        ajouter une catégorie
+        modifier une catégorie
     {% elif form|add_form == "Film_Form" %}
-        ajouter un Film
+        modifier un Film
     {% elif form|add_form == "Acteur_Form" %}
-        ajouter un acteur
+        modifier un acteur
     {% elif form|add_form == "Relation_Form" %}
-        ajouter une relation acteur/film
+        modifier une relation acteur/film
     {% elif form|add_form == "Personne_Form" %}
         Inscrition
     {% elif form|add_form == "Commentaire_Form" %}
-        poster un Commentaire
+        modifier un Commentaire
     {%endif%}
 {% endblock %}
 
+{% block content %}
+    {% load test_add_form %}
+    {% if form|add_form == "Categorie_Form" %}
+        modifier une catégorie
+    {% elif form|add_form == "Film_Form" %}
+        modifier un Film
+    {% elif form|add_form == "Acteur_Form" %}
+        modifier un acteur
+    {% elif form|add_form == "Relation_Form" %}
+        modifier une relation acteur/film
+    {% elif form|add_form == "Personne_Form" %}
+        Inscrition
+    {% elif form|add_form == "Commentaire_Form" %}
+        modifier un Commentaire
+    {%endif%}
+{% endblock %}
 {%block test%}
 {% load test_add_form %}
  
     {% if form|add_form == "Categorie_Form" %}
-        <form method="post" action="/filmographie/traitement_update/1/">
+        <form method="POST" action="/filmographie/categorie_up/{{id}}/">
     {% elif form|add_form == "Film_Form" %}
-        <form method="post" action="/filmographie/traitement_update/2/">
+        <form method="post" action="/filmographie/film_up/{{id}}/" enctype="multipart/form-data">
     {% elif form|add_form == "Acteur_Form" %}
-        <form method="post" action="/filmographie/traitement_update/3/">
+        <form method="post" action="/filmographie/acteur_up/{{id}}/" enctype="multipart/form-data">
     {% elif form|add_form == "Relation_Form" %}
-        <form method="post" action="/filmographie/traitement_update/4/">
+        <form method="post" action="/filmographie/relation_up/{{id}}/">
     {% elif form|add_form == "Personne_Form" %}
-        <form method="post" action="/filmographie/traitement_update/5/">
+        <form method="post" action="/filmographie/personne_up/{{id}}/">
     {% elif form|add_form == "Commentaire_Form" %}
-        <form method="post" action="/filmographie/traitement_update/6/">
+        <form method="post" action="/filmographie/commentaire_up/{{id}}/">
     {%endif%}
 {%endblock%}
 

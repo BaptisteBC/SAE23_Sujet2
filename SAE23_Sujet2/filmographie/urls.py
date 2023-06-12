@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views,views_pdf
 
 urlpatterns = [
     path('', views.index),
@@ -28,7 +28,15 @@ urlpatterns = [
     path('update/acteur/<int:id>/', views.update_Acteur),
     path('update/user/<int:id>/', views.update_Personne),
     path('update/commentaire/<int:id>/', views.update_Commentaire),
-    path('traitement_update/<int:id>/',views.traitement_update),
-    #path('upload/', views.upload_csv, name='upload_csv'),
+    #path('traitement_update/<int:id>/<int:id_obj>/',views.traitement_update),
+    path('ajout/film_csv/', views.add_Film_csv),
+    path('upload/', views.import_films),
+    path('download/pdf/<int:id>/', views_pdf.film_pdf),
+    path('categorie_up/<int:id>/', views.traitement_up_Cat),
+    path('film_up/<int:id>/', views.traitement_up_Film),
+    path('acteur_up/<int:id>/', views.traitement_up_Act),
+    path('relation_up/<int:id>/', views.traitement_up_Rel), 
+    path('personne_up/<int:id>/', views.traitement_up_Pers),
+    path('commentaire_up/<int:id>/', views.traitement_up_Com),
 
 ]
