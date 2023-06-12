@@ -1,6 +1,8 @@
-from django.forms import ModelForm, ChoiceField, ValidationError, Form, FileField
+from django.forms import ModelForm, ChoiceField, ValidationError, Form, FileField, ImageField
 from django.utils.translation import gettext_lazy as _
 from . import models
+from django.core.validators import FileExtensionValidator
+
 
 class Categorie_Form(ModelForm):
     class Meta:
@@ -12,6 +14,8 @@ class Categorie_Form(ModelForm):
         }
 
 class Film_Form(ModelForm):
+    affiche = ImageField(validators=[FileExtensionValidator(allowed_extensions=['png'])])
+
     class Meta:
         model = models.Film
         fields = ('titre', 'annee_sortie',  'realisateur', 'categorie','affiche',) 
