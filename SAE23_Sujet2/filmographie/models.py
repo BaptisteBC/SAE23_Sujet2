@@ -23,7 +23,7 @@ class Film(models.Model):
     
 
 class Acteur(models.Model):
-    nom = models.CharField(max_length=255, unique=True)
+    nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255, null= True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     photos = models.ImageField(upload_to='filmographie/acteur/', null=True)

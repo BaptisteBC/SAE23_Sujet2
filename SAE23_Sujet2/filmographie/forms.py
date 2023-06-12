@@ -14,7 +14,7 @@ class Categorie_Form(ModelForm):
         }
 
 class Film_Form(ModelForm):
-    affiche = ImageField(validators=[FileExtensionValidator(allowed_extensions=['png'])])
+    affiche = ImageField(validators=[FileExtensionValidator(allowed_extensions=['png', 'jpeg'])])
 
     class Meta:
         model = models.Film

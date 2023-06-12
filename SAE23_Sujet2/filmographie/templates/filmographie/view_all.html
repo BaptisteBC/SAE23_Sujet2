@@ -52,7 +52,7 @@
         {% else %}
         <div class = "d2">
         {% for i in liste %}
-            <li class="list"> {{i.nom}}
+            <li class="list"> {{i.prenom}} {{i.nom}}
                 <a class="deta" href="/filmographie/view/acteur/{{i.id}}/">Afficher les détails</a>
             </li>
         {% endfor %} 

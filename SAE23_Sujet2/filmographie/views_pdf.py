@@ -11,6 +11,11 @@ def film_pdf(request, id):
     pdf.add_page()
     note = views.note_moy(id)
 
+    # Add the film poster (affiche)
+    if film.affiche:
+        poster_path = film.affiche.path  # Retrieve the file path of the affiche image
+        pdf.image(poster_path,x=(pdf.w - 67.5) / 2, h=100, w=67.5)
+
     # Add the film details
     pdf.set_font("Arial", '', 15)
     pdf.cell(200, 10, txt=f"Titre du film: {film.titre}", ln=1, align='C')
@@ -20,10 +25,6 @@ def film_pdf(request, id):
     pdf.cell(200, 10, txt=f"note moyenne: {note}/5", ln=5, align='C')
     pdf.cell(200, 10, txt="", ln=1, align='C')
 
-    # Add the film poster (affiche)
-    if film.affiche:
-        poster_path = film.affiche.path  # Retrieve the file path of the affiche image
-        pdf.image(poster_path, x=10, y=10, w=100, h=100)
 
     # Add the actors who played in the film
     acteurs = models.Film_Acteur.objects.filter(film=film)
@@ -38,12 +39,13 @@ def film_pdf(request, id):
             pdf.cell(200, 10, txt=f"{actor.acteur.nom} {actor.acteur.prenom}", ln=8, align='C')
 
     coms = models.Commentaire.objects.filter(film=film)
+    pdf.set_font("Arial", '', 15)
+    pdf.cell(200, 10, txt="", ln=1, align='C')
+    pdf.cell(200, 10, txt="Commentaire:", ln=1, align='C')
     if len(coms) == 0:
         pdf.cell(200, 10, txt="Aucun commentaires ont été posté pour ce film", ln=9, align='C')
     else:
-        pdf.set_font("Arial", '', 15)
-        pdf.cell(200, 10, txt="", ln=1, align='C')
-        pdf.cell(200, 10, txt="Commentaire:", ln=1, align='C')
+       
         for com in coms:
             pdf.set_font("Arial", '', 10)
             pdf.cell(200, 10, txt="", ln=1, align='C')
