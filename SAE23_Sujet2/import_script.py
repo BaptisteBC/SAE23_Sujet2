@@ -2,8 +2,8 @@ import csv
 from filmographie.models import Categorie  # replace myapp with your app name
 
 # First, load the marque data.
-with open('media/import_categorie.csv', newline='', encoding='utf-8') as f:
-    reader = csv.reader(f)
+with open('media/import_categorie_2.csv', newline='', encoding='utf-8') as f:
+    reader = csv.reader(f, delimiter='/')
     next(reader)  # This skips the first row of the CSV file.
     for row in reader:
         _, created = Categorie.objects.get_or_create(

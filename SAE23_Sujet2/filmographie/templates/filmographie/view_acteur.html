@@ -26,10 +26,10 @@
         <li class="film_act"><a href='/filmographie/view/film/{{film.id}}'>{{ film.titre }}</a></li>
         
     {% empty %}
-        <p>aucun film n'est recencé pour cet acteur n'hésitez pas a en ajouter en cliquant <a href="/filmographie/ajout/relation/">ici</a></p>
+        <p>aucun film n'est recencé pour cet acteur n'hésitez pas a en ajouter en cliquant <a href="/filmographie/ajout/relation/?acteur_id={{ acteur.id }}">ici</a></p>
     {% endfor %}
     {%if films%}
-    <a href="/filmographie/ajout/relation/">Ajouter un film dans le quel {{acteur.prenom}} {{acteur.nom}} a joué</a>
+    <a href="/filmographie/ajout/relation/?acteur_id={{ acteur.id }}">Ajouter un film dans le quel {{acteur.prenom}} {{acteur.nom}} a joué</a>
     {%endif%}
 </div>
 </div>

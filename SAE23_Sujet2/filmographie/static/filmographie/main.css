@@ -166,3 +166,9 @@ input{
 .consigne{
     text-align: center;
 }
+.description_cate{
+    display: block;
+    width: 40%;
+    text-align: justify;
+    margin: 15px 0px 15px 0px;
+}

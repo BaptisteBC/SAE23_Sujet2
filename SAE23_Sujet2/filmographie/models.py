@@ -29,7 +29,7 @@ class Acteur(models.Model):
     photos = models.ImageField(upload_to='filmographie/acteur/', null=True)
     
     def __str__(self):
-        return self.nom
+        return (f'{self.prenom} {self.nom}')
     
 
 class Film_Acteur(models.Model):

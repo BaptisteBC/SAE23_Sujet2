@@ -37,7 +37,7 @@
 {% endblock %}
 {%block test%}
 {% load test_add_form %}
- 
+
     {% if form|add_form == "Categorie_Form" %}
         <form method="POST" action="/filmographie/categorie_up/{{id}}/">
     {% elif form|add_form == "Film_Form" %}

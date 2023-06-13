@@ -81,10 +81,15 @@ def add_Film(request):
     form = forms.Film_Form
     return render(request, 'filmographie/add_form.html', {'form' : form})
 
-def update_Film(request,id):
+'''def update_Film(request,id):
     film = models.Film.objects.get(pk=id)
     form = forms.Film_Form(film.__dict__)
     return render(request, 'filmographie/update_form.html',{"form":form, "id": id})
+'''
+def update_Film(request, id):
+    film = models.Film.objects.get(pk=id)
+    form = forms.Film_Form(instance=film)  # Pass the film instance directly
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
 
 def delete_Film(request,id):
     film = models.Film.objects.get(pk=id)
@@ -164,13 +169,21 @@ def view_Personne(request,id):
 
 
 def add_Commentaire(request):
-    form = forms.Commentaire_Form
-    return render(request, 'filmographie/add_form.html', {'form': form, 'test':form})
-
+    film_id = request.GET.get('film_id')
+    initial_data = {'film': film_id} if film_id else None
+    form = forms.Commentaire_Form(initial=initial_data)
+    return render(request, 'filmographie/add_form.html', {'form': form,'test':form})
+'''
 def update_Commentaire(request, id):
     com = models.Commentaire.objects.get(pk=id)
     form = forms.Commentaire_Form(com.__dict__)
     return render(request, 'filmographie/update_form.html',{"form":form, "id": id})
+'''
+def update_Commentaire(request, id):
+    com = models.Commentaire.objects.get(pk=id)
+    form = forms.Commentaire_Form(instance=com)  # Pass the film instance directly
+    return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
+
 
 def delete_Commentaire(request,id):
     com = models.Commentaire.objects.get(pk=id)
@@ -184,8 +197,17 @@ def delete_Commentaire(request,id):
 #Consernant les relation films acteurs
 
 def add_Relation(request):
-    form = forms.Relation_Form
-    return render(request, 'filmographie/add_form.html', {"form" : form})
+    acteur_id = request.GET.get('acteur_id')
+    film_id = request.GET.get('film_id')
+    if acteur_id:
+        initial_data = {'acteur': acteur_id} 
+    elif film_id:
+        initial_data = {'film': film_id} 
+    else:
+        initial_data = None
+    form = forms.Relation_Form(initial=initial_data)
+    return render(request, 'filmographie/add_form.html', {'form': form})
+
 
 
 
@@ -256,7 +278,7 @@ def traitement_up_Film(request, id):
             form.save()
             return HttpResponseRedirect('/filmographie/submitted/')
     else:
-        form = forms.Categorie_Form(instance=film)
+        form = forms.Film_Form(instance=film)
     return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
 
 def traitement_up_Act(request, id):
@@ -302,24 +324,3 @@ def traitement_up_Rel(request, id):
     else:
         form = forms.Relation_Form(instance=rel)
     return render(request, 'filmographie/update_form.html', {"form": form, "id": id})
-
-'''
-def traitement_update(request, id, id_obj):
-    test_forms = {
-        1: forms.Categorie_Form,
-        2: forms.Film_Form,
-        3: forms.Acteur_Form,
-        4: forms.Relation_Form,
-        5: forms.Personne_Form,
-        6: forms.Commentaire_Form,
-    }
-    class_form = test_forms.get(id)
-    if not class_form:
-        return HttpResponseRedirect('/filmographie/') 
-    form = class_form(request.POST, request.FILES)
-    if form.is_valid():
-        objet = form.save(commit=False)
-        objet.id = id_obj
-        objet.save()
-        return HttpResponseRedirect('/filmographie/submitted/')
-    return render(request, 'filmographie/add_form.html', {'form': form})  '''

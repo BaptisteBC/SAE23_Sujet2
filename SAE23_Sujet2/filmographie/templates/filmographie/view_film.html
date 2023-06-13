@@ -29,10 +29,10 @@
     <li><a href="/filmographie/view/acteur/{{acteur.id}}">{{acteur.nom}} {{acteur.prenom}}</a></li>
     </div>  
     {% empty %}
-    <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/'>ici</a></p>
+    <p>nous ne rensençons aucun acteur ayant joué dans ce film, vous pouvez en ajouter <a href='/filmographie/ajout/relation/?film_id={{ film.id }}'>ici</a></p>
     {% endfor %}
     {%if acteurs%}
-    <a class="add_act" href='/filmographie/ajout/relation/'>Ajouter un/une acteur/actrice<br> qui a joué dans ce film</a>
+    <a class="add_act" href='/filmographie/ajout/relation/?film_id={{ film.id }}'>Ajouter un/une acteur/actrice<br> qui a joué dans ce film</a>
     {%endif%}
     </div>
     <h2 class="com_titre">commentaire et note apporté a ce film</h2>
@@ -88,11 +88,11 @@
     </div>
     {%endif%}
     {% empty %}
-    <p>nous ne rensençons aucun commentaire pour ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
+    <p>nous ne rensençons aucun commentaire pour ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/?film_id={{ film.id }}'>ici</a></p>
     {% endfor %}
 
     {%if commentaire%}
-    <a href='/filmographie/ajout/commentaire/'>Poster un commentaire</a>
+    <a href='/filmographie/ajout/commentaire/?film_id={{ film.id }}'>Poster un commentaire</a>
     {%endif%}
     </div>
     {%endblock%}
