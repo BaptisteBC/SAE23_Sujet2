@@ -54,7 +54,7 @@
 
     {% endfor %}
     {% for com in pire %}
-    {% if pire.all|length != best.all|length %}
+    {% if com != best.0 %}
     <h4>Pire commentaire</h4>
     <div class="com">
         <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
@@ -73,6 +73,8 @@
     {% endfor %}
     <h4>Commentaires</h4>
     {% for com in commentaire %}
+    {% if commentaire.all|length != best.all|length %}
+
     <div class="com">
         <p>posté par <a href="/filmographie/view/user/{{com.personne.id}}/">{{com.personne.pseudo}}</a></p>
         {%if com.note%}
@@ -84,6 +86,7 @@
         <p>commentaire: </p>
         <p>{{com.commentaire}}</P>
     </div>
+    {%endif%}
     {% empty %}
     <p>nous ne rensençons aucun commentaire pour ce film, vous pouvez en ajouter <a href='/filmographie/ajout/commentaire/'>ici</a></p>
     {% endfor %}

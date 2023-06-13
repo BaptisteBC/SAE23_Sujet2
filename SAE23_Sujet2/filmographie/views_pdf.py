@@ -34,9 +34,9 @@ def film_pdf(request, id):
     else:
         pdf.set_font("Arial", '', 15)
         pdf.cell(200, 10, txt="Acteurs ayant joué dans ce film:", ln=7, align='C')
-        for actor in acteurs:
+        for acteur in acteurs:
             pdf.set_font("Arial", '', 10)
-            pdf.cell(200, 10, txt=f"{actor.acteur.nom} {actor.acteur.prenom}", ln=8, align='C')
+            pdf.cell(200, 10, txt=f"{acteur.acteur.prenom} {acteur.acteur.nom} ", ln=8, align='C')
 
     coms = models.Commentaire.objects.filter(film=film)
     pdf.set_font("Arial", '', 15)
