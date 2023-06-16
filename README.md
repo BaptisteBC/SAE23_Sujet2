@@ -10,7 +10,7 @@ Le script SQL permet de créer automatiquement les tables dont on a besoin pour 
 
 apt install -y python3-venv
 
-**//Transférer le repo github au niveau de /home/votreuser/(placer ici)**
+**//Transférer le repo github au niveau de /home/VotreUser/(placer ici)**
 
 
 **//Dans notre cas**
