@@ -29,6 +29,7 @@ pip install MySQLclient
 
 **//Dans votre setting.py ajouter l'IP de votre machine serveur comme ceci: ALLOWED_HOSTS = ['X.X.X.X']
 //config gunicorn**
+
 mkdir conf
 
 nano conf/gunicorn_config.py
