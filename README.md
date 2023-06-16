@@ -14,6 +14,7 @@ apt install -y python3-venv
 
 
 **//Dans notre cas**
+
 cd /home/servusr/SAE23_Sujet2
 
 python -m venv django_env
