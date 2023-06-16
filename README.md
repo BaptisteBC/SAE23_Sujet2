@@ -37,8 +37,11 @@ nano conf/gunicorn_config.py
 **//entrer les lignes suivantes**
 
 command = '/home/votreuser/django_env/bin/gunicorn'
+
 pythonpath = '/home/votreuser/SAE23_Sujet2'
+
 bind = 'X.X.X.X:port' *(l'ip de votre machine server, et le port sur lequel vous souhaiter écouter, ici 8000)*
+
 workers = 3
 
 **//Fermer nano**
