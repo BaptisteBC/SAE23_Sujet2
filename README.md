@@ -27,6 +27,8 @@ pip install django
 pip install gunicorn
 pip install MySQLclient
 
+
+
 **//Dans votre setting.py ajouter l'IP de votre machine serveur comme ceci: ALLOWED_HOSTS = ['X.X.X.X']
 //config gunicorn**
 
@@ -45,6 +47,7 @@ bind = 'X.X.X.X:port' *(l'ip de votre machine server, et le port sur lequel vous
 workers = 3
 
 **//Fermer nano**
+
 
 
 **//Passons à la config de nginx
@@ -67,8 +70,17 @@ location / {
 
 **//Fermer nano**
 
+
+
 cd /etc/nginx/sites-enabled
 
 ln -s /etc/nginx/sites-available/SAE23_Sujet2
 
 systemctl restart nginx
+
+**//enfin on peut lancer le serveur**
+
+cd /home/servusr/SAE23_Sujet2
+gunicorn -c conf/gunicorn_config.py SAE23_Sujet2.wsgi
+
+**//Dans votre navigateur tapez http://X.X.X.X:80/filmographie**
