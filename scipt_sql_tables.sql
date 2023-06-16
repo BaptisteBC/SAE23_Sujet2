@@ -31,20 +31,6 @@ CREATE TABLE `filmographie_categorie` (
   UNIQUE KEY `nom` (`nom`)
 );
 
-CREATE TABLE `filmographie_commentaire` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `note` int NOT NULL,
-  `commentaire` longtext NOT NULL,
-  `date` date NOT NULL,
-  `film_id` bigint NOT NULL,
-  `personne_id` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `filmographie_comment_film_id_55ff8448_fk_filmograp` (`film_id`),
-  KEY `filmographie_comment_personne_id_3e4d2d5c_fk_filmograp` (`personne_id`),
-  CONSTRAINT `filmographie_comment_film_id_55ff8448_fk_filmograp` FOREIGN KEY (`film_id`) REFERENCES `filmographie_film` (`id`),
-  CONSTRAINT `filmographie_comment_personne_id_3e4d2d5c_fk_filmograp` FOREIGN KEY (`personne_id`) REFERENCES `filmographie_personne` (`id`)
-);
-
 CREATE TABLE `filmographie_film` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `titre` varchar(255) NOT NULL,
@@ -67,4 +53,18 @@ CREATE TABLE `filmographie_film_acteur` (
   KEY `filmographie_film_ac_film_id_02ffa3fa_fk_filmograp` (`film_id`),
   CONSTRAINT `filmographie_film_ac_acteur_id_e75ea965_fk_filmograp` FOREIGN KEY (`acteur_id`) REFERENCES `filmographie_acteur` (`id`),
   CONSTRAINT `filmographie_film_ac_film_id_02ffa3fa_fk_filmograp` FOREIGN KEY (`film_id`) REFERENCES `filmographie_film` (`id`)
+);
+
+CREATE TABLE `filmographie_commentaire` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `note` int NOT NULL,
+  `commentaire` longtext NOT NULL,
+  `date` date NOT NULL,
+  `film_id` bigint NOT NULL,
+  `personne_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `filmographie_comment_film_id_55ff8448_fk_filmograp` (`film_id`),
+  KEY `filmographie_comment_personne_id_3e4d2d5c_fk_filmograp` (`personne_id`),
+  CONSTRAINT `filmographie_comment_film_id_55ff8448_fk_filmograp` FOREIGN KEY (`film_id`) REFERENCES `filmographie_film` (`id`),
+  CONSTRAINT `filmographie_comment_personne_id_3e4d2d5c_fk_filmograp` FOREIGN KEY (`personne_id`) REFERENCES `filmographie_personne` (`id`)
 );
