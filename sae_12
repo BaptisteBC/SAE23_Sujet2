@@ -1,0 +1,12 @@
+server {
+	listen 80;
+	server_name 192.168.129.231;
+
+location /static/ {
+	alias /home/servusr/SAE23_Sujet2/filmographie/static/;
+}
+
+location / {
+	proxy_pass http://192.168.129.231:8000;
+	}
+}
