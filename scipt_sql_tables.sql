@@ -1,3 +1,7 @@
+CREATE database sae23_sujet2;
+
+USE sae23_sujet2;
+
 CREATE TABLE `filmographie_personne` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(255) NOT NULL,
