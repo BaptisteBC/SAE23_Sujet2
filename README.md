@@ -23,10 +23,9 @@ source django_env/bin/activate
 
 apt-get install python3-dev default-libmysqlclient-dev build-essential
 
-pip install django
-pip install gunicorn
-pip install MySQLclient
+**Installer depuis le requirement.txt**
 
+pip install -r requirements.txt
 
 
 **//Dans votre setting.py ajouter l'IP de votre machine serveur comme ceci: ALLOWED_HOSTS = ['X.X.X.X']
