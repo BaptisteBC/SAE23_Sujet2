@@ -1,0 +1,36 @@
+-- Exemple de données pour la table filmographie_personne
+INSERT INTO filmographie_personne (pseudo, nom, prenom, mail, mot_de_passe, type) VALUES
+  ('user1', 'Dupont', 'Jean', 'jean.dupont@example.com', 'password123', 'Utilisateur'),
+  ('admin1', 'Martin', 'Sophie', 'sophie.martin@example.com', 'adminpass', 'Administrateur'),
+  ('user2', 'Gagnon', 'Luc', 'luc.gagnon@example.com', 'pass123', 'Utilisateur');
+
+-- Exemple de données pour la table filmographie_acteur
+INSERT INTO filmographie_acteur (nom, prenom, age, photos) VALUES
+  ('Smith', 'John', 35, 'john_smith.jpg'),
+  ('Johnson', 'Emily', 28, 'emily_johnson.jpg'),
+  ('Brown', 'Michael', 42, 'michael_brown.jpg');
+
+-- Exemple de données pour la table filmographie_categorie
+INSERT INTO filmographie_categorie (nom, descriptif) VALUES
+  ('Action', 'Films d''action remplis de suspense et d''aventure'),
+  ('Comédie', 'Films comiques et divertissants'),
+  ('Drame', 'Films émotionnels et profonds');
+
+-- Exemple de données pour la table filmographie_commentaire
+INSERT INTO filmographie_commentaire (note, commentaire, date, film_id, personne_id) VALUES
+  (4, 'Très bon film, j''ai adoré !', '2023-05-01', 1, 1),
+  (3, 'Le scénario aurait pu être meilleur.', '2023-06-10', 2, 2),
+  (5, 'Chef-d''œuvre absolu, à ne pas manquer !', '2023-04-15', 3, 3);
+
+-- Exemple de données pour la table filmographie_film
+INSERT INTO filmographie_film (titre, annee_sortie, affiche, realisateur, categorie_id) VALUES
+  ('Le Voyage', 2019, 'le_voyage.jpg', 'Anderson', 1),
+  ('La Quête', 2021, 'la_quete.jpg', 'Roberts', 2),
+  ('L''Énigme', 2020, 'lenigme.jpg', 'Davis', 3);
+
+-- Exemple de données pour la table filmographie_film_acteur
+INSERT INTO filmographie_film_acteur (acteur_id, film_id) VALUES
+  (1, 1),
+  (2, 1),
+  (2, 2),
+  (3, 3);
