@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-135^&109wcf#=7ge_%zhlyci+rs9av6pt+*b670*oc@i*tgc%+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.129.231'
+]
 
 
 # Application definition
@@ -79,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sae23_sujet2',
-        'USER': 'root',
+        'USER': 'jajman',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.129.124',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
@@ -132,3 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CSRF_TRUSTED_ORIGINS = ['http://192.168.129.231']
